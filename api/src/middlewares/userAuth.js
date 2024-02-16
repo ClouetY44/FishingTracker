@@ -11,7 +11,7 @@ const authenticateJWT = (req, res, next) => {
             console.log(err)
             return res.status(400).json({error:"Problem whith Token"})
         }
-        if(decoded.role !== "pêcheur"){
+        if(decoded.role !== "pêcheur" && decoded.role !== "propriétaire" && decoded.role !== "admin"){
             return res.status(400).json({error:"user required"})
         }
         req.user = decoded

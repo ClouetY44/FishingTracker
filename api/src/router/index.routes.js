@@ -12,10 +12,10 @@ import user_routes from "./user.routes.js"
 
 const router = express.Router();
 
-router.use("/app", app_routes);
-router.use("/auth", auth_routes)
-router.use("/admin", adminAuth, admin_routes)
-router.use("/owner", ownerAuth, owner_routes)
-router.use("/user", userAuth, user_routes)
+router.use("/app", app_routes) /*pas de connexion requise*/
+router.use("/auth", auth_routes) /*authentification*/
+router.use("/admin", adminAuth, admin_routes) /*connexion admin requise*/
+router.use("/owner", ownerAuth, owner_routes) /*connexion propriétaire requise*/
+router.use("/user", userAuth, user_routes) /*connexion pêcheur requise*/
 
 export default router;
