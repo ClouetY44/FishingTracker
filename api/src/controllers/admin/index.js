@@ -23,15 +23,36 @@ const deleteUser = async (req,res) => {
 }
 
 const deleteCatch = async (req,res) => {
-    
+    try {
+        const { id } = req.body
+        const query = "DELETE FROM catch WHERE id = ?"
+        await Query.runWithParams(query, [id])
+        res.json({ message: "post supprimé"});
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 const deleteArticle = async (req,res) => {
-    
+    try {
+        const { id } = req.body
+        const query = "DELETE FROM articles WHERE id = ?"
+        await Query.runWithParams(query, [id])
+        res.json({ message: "article supprimé"});
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 const deleteComment = async (req,res) => {
-    
+    try {
+        const { id } = req.body
+        const query = "DELETE FROM comment WHERE id = ?"
+        await Query.runWithParams(query, [id])
+        res.json({ message: "commentaire supprimé"});
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 export {updateRole,deleteUser,deleteCatch,deleteArticle,deleteComment}

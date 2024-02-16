@@ -13,11 +13,25 @@ const postCatch = async (req,res) => {
 }
 
 const updateCatch = async (req,res) => {
-    
+    try {
+        const { length,weight,description,wind,lake_id,fish_id,weather_id,id } = req.body
+        const query = "UPDATE catch SET Length = ?, Weight = ?, Catch_Date = NOW(), Description = ?, Wind = ?, lake_id = ?, fish_id = ?, weather_id = ? WHERE id = ?"
+        await Query.runWithParams(query, [length,weight,description,wind,lake_id,fish_id,weather_id,id])
+        res.json({ message: "Mise à jour réussi" });
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 const deleteCatch = async (req,res) => {
-    
+    try {
+        const { id } = req.body
+        const query = "DELETE FROM catch WHERE id = ?"
+        await Query.runWithParams(query, [id])
+        res.json({ message: "post supprimé"});
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 // ARTICLE
@@ -33,11 +47,25 @@ const postArticle = async (req,res) => {
 }
 
 const updateArticle = async (req,res) => {
-    
+    try {
+        const { title, content, id } = req.body
+        const query = "UPDATE articles SET Title = ?, Content = ?, PublicationDate = NOW() WHERE id = ?"
+        await Query.runWithParams(query, [title, content, id])
+        res.json({ message: "Mise à jour réussi" });
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 const deleteArticle = async (req,res) => {
-    
+    try {
+        const { id } = req.body
+        const query = "DELETE FROM articles WHERE id = ?"
+        await Query.runWithParams(query, [id])
+        res.json({ message: "article supprimé"});
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 // COMMENT
@@ -53,11 +81,25 @@ const postComment = async (req,res) => {
 }
 
 const updateComment = async (req,res) => {
-    
+    try {
+        const { content, users_id, articles_id, id } = req.body
+        const query = "UPDATE comment SET Content = ?, PublicationDate = NOW(), users_id = ?, articles_id = ? WHERE id = ?"
+        await Query.runWithParams(query, [content, users_id, articles_id, id])
+        res.json({ message: "Mise à jour réussi" });
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 const deleteComment = async (req,res) => {
-    
+    try {
+        const { id } = req.body
+        const query = "DELETE FROM comment WHERE id = ?"
+        await Query.runWithParams(query, [id])
+        res.json({ message: "commentaire supprimé"});
+    } catch {
+        res.status(500).json({msg: "error"})
+    }
 }
 
 export {postCatch,postArticle,postComment,updateCatch,updateArticle,updateComment,deleteCatch,deleteArticle,deleteComment}

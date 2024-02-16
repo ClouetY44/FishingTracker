@@ -1,11 +1,34 @@
 import Query from "../model/Query.js";
 
+// LAKE
 const getAllLake = async (req,res) => {
     try {
         const queryLake = "SELECT * FROM lake"
         const lakes = await Query.run(queryLake)
         console.log(lakes)
         res.json(lakes)
+    } catch {
+        res.status(500).json({msg: error})
+    }
+}
+
+const getLake = async (req,res) => {
+    try { 
+        const { id } = req.params;
+        const queryLake = "SELECT * FROM lake WHERE id = ?"
+        const lake = await Query.runWithParams(queryLake, [id]);
+        res.json(lake);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// FISH
+const getFishCategories = async (req,res) => {
+    try {
+        const queryCategorie = "SELECT * FROM categories"
+        const categories = await Query.run(queryCategorie)
+        res.json(categories)
     } catch {
         res.status(500).json({msg: error})
     }
@@ -22,17 +45,18 @@ const getAllFish = async (req,res) => {
     }
 }
 
-const getAllMethod = async (req,res) => {
-    try {
-        const queryMethod = "SELECT * FROM method"
-        const methods = await Query.run(queryMethod)
-        console.log(methods)
-        res.json(methods)
-    } catch {
-        res.status(500).json({msg: error})
+const getFish = async (req,res) => {
+    try { 
+        const { id } = req.params;
+        const queryFish = "SELECT * FROM fish WHERE id = ?"
+        const fish = await Query.runWithParams(queryFish, [id]);
+        res.json(fish);
+    } catch (error) {
+        console.log(error);
     }
 }
 
+// ARTICLE
 const getAllArticle = async (req,res) => {
     try {
         const queryAllArticle = "SELECT * FROM articles"
@@ -55,6 +79,7 @@ const getArticle = async (req,res) => {
     }
 }
 
+// COMMENT
 const getComment = async (req,res) => {
     try { 
         const { id } = req.params;
@@ -66,11 +91,13 @@ const getComment = async (req,res) => {
     }
 }
 
-const getFishCategories = async (req,res) => {
+// CONTENT
+const getAllMethod = async (req,res) => {
     try {
-        const queryCategorie = "SELECT * FROM categories"
-        const categories = await Query.run(queryCategorie)
-        res.json(categories)
+        const queryMethod = "SELECT * FROM method"
+        const methods = await Query.run(queryMethod)
+        console.log(methods)
+        res.json(methods)
     } catch {
         res.status(500).json({msg: error})
     }
@@ -95,14 +122,6 @@ const getCatch = async (req,res) => {
     } catch (error) {
         console.log(error);
     }
-}
-
-const getLake = async (req,res) => {
-    
-}
-
-const getFish = async (req,res) => {
-    
 }
 
 export {getAllLake,getAllFish,getAllMethod,getAllArticle,getComment,getArticle,getFishCategories,getAllCatch,getCatch,getLake,getFish}
