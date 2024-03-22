@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { logout } from "../../store/slice/user";
 
@@ -23,9 +23,16 @@ function Header() {
 
   return (
     <header>
-      <p>voici le header</p>
-        <button onClick={handleLogout}>Se déconnecter</button>
-        <Link to="/connexion">Se connecter</Link>
+      <div>
+      <img src="/src/assets/images/logo.png" alt="logo fishing tracker" />
+      </div>
+      <NavLink to={""}><h1>Fishing Tracker</h1></NavLink>
+      <nav>
+       <NavLink to={"liste-des-étangs"}>Étangs</NavLink>
+       <NavLink to={"liste-des-poissons"}>Poissons</NavLink>
+       <NavLink to={"connexion"}>Connexion</NavLink>
+        {/* <button onClick={handleLogout}>Se déconnecter</button> */}
+        </nav>
     </header>
   );
 }

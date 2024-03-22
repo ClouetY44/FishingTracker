@@ -36,7 +36,7 @@ const getFishCategories = async (req,res) => {
 
 const getAllFish = async (req,res) => {
     try {
-        const queryFish = "SELECT * FROM fish"
+        const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id"
         const fishs = await Query.run(queryFish)
         console.log(fishs)
         res.json(fishs)

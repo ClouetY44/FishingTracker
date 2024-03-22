@@ -1,0 +1,139 @@
+@use "variables" as *;
+@use "article" as*;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: $domine;
+    height: 100vh;
+    background-color: $color-light;
+    color: $color-dark;
+    font-size: 1.6rem;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+    min-height: 100vh;
+    max-width: 767px;
+    background-color: $color-light;
+
+    @media (min-width: 768px) {
+        max-width: 1023px;
+    }
+
+    @media (min-width: 1024px) {
+        max-width: 1600px;
+    }
+}
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-shadow: 1px 1px 0px $color-dark;
+    font-family: $kotta;
+    font-size: 3.5rem;
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 20px;;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+header,
+main,
+footer {
+    flex: 1 0 auto;
+}
+
+header,
+footer {
+    background-color: $color-dark;
+    color: $color-light;
+    padding: 10px;
+    max-height: 140px;
+}
+
+header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    text-align: center;
+
+    a {
+        width: 50%;
+
+        h1 {
+            text-shadow: 1px 1px 0px $color-light;
+            color: $color-light;
+            font-family: $dancing;
+            font-size: 5.5rem;
+        }
+    }
+
+    div {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        img {
+            max-height: 120px;
+        }
+    }
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 25%;
+
+        @media (min-width: 1024px) {
+            flex-direction: row;
+        }    
+
+        a {
+            color: $color-light;
+            padding: 5px;
+            font-family: $kotta;
+
+            @media (min-width: 1024px) {
+                padding: 10px;
+            }
+        }
+    }
+}
+
+footer {
+    padding-top: 20px;
+    text-align: center;
+    a {
+        color: $color-light;
+        padding: 5px;
+        font-family: $kotta;
+    }
+    nav a {
+        font-size: 3rem;
+        padding: 10px;
+        margin-top: -5px;
+    }
+}

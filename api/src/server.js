@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import path from "path";
 import cors from "cors";
 import cookieParser from "cookie-parser"
 import router from "./router/index.routes.js"
@@ -15,6 +16,11 @@ app.use(
         methods: ["GET", "POST", "DELETE", "PATCH"], 
         credentials: true, 
     })
+);
+
+app.use(
+    "/img",
+    express.static(path.join(process.cwd(), "public/assets/images"))
 );
 
 app.use(express.json());
