@@ -48,7 +48,7 @@ const getAllFish = async (req,res) => {
 const getFish = async (req,res) => {
     try { 
         const { id } = req.params;
-        const queryFish = "SELECT * FROM fish WHERE id = ?"
+        const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id WHERE fish.id = ?"
         const fish = await Query.runWithParams(queryFish, [id]);
         res.json(fish);
     } catch (error) {
@@ -105,7 +105,7 @@ const getAllMethod = async (req,res) => {
 
 const getAllCatch = async (req,res) => {
     try {
-        const queryAllCatch = "SELECT * FROM catch"
+        const queryAllCatch = "SELECT catch.id, Description, users_id, pictures_catch.Src, pictures_catch.Alt, users.Username FROM catch INNER JOIN pictures_catch ON catch.id=pictures_catch.catch_id INNER JOIN users ON users_id=users.id"
         const catches = await Query.run(queryAllCatch)
         res.json(catches)
     } catch {

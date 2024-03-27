@@ -25,11 +25,12 @@ function Header() {
     <header>
       <div>
       <img src="/src/assets/images/logo.png" alt="logo fishing tracker" />
-      </div>
       <NavLink to={""}><h1>Fishing Tracker</h1></NavLink>
+      </div>
       <nav>
        <NavLink to={"liste-des-étangs"}>Étangs</NavLink>
        <NavLink to={"liste-des-poissons"}>Poissons</NavLink>
+       <NavLink to={"liste-des-prises"}>Prises</NavLink>
        <NavLink to={"connexion"}>Connexion</NavLink>
         {/* <button onClick={handleLogout}>Se déconnecter</button> */}
         </nav>

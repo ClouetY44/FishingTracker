@@ -1,35 +1,38 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { fetchFish } from "../../../store/slice/fish";
 
-function FishList(){
-    const dispatch = useDispatch()
-    const {list} = useSelector((state) => state.fish)
-    
-    useEffect(() => {
-        dispatch(fetchFish())
-    }, [])
-    
+function FishList() {
+  const dispatch = useDispatch();
+  const { list } = useSelector((state) => state.fish);
 
-    return (
-        <main>
-            <h2>Liste des poissons</h2>
-            <section>
-            {list.map((list) =>(
-                <article>
-                <div key={list.id}>
-                    <h3>{list.Title}</h3>
-                    <img src={`http://localhost:9000/img/${list.Src}`} alt={list.Alt} />
-                    <p>{list.Description}</p>
-                    <NavLink to={""}>Plus d'infos</NavLink>
-                </div>
-                </article>
-            ))}
-            </section>
-        </main>
-    )
+  useEffect(() => {
+    dispatch(fetchFish());
+  }, []);
+
+  console.log(list)
+  return (
+    <main>
+      <h2>Liste des poissons</h2>
+      <section>
+        {list.map((element) => (
+          <article key={element.id}>
+            <h3>{element.Title}</h3>
+            <img
+              src={`http://localhost:9000/img/${element.Src}`}
+              alt={element.Alt}
+            />
+            <p>{element.Description}</p>
+            <Link to={`/liste-des-poissons/${element.id}/detail`}>
+              Plus d'infos
+            </Link>
+          </article>
+        ))}
+      </section>
+    </main>
+  );
 }
 
-export default FishList
+export default FishList;
