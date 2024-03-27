@@ -2,8 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+
 const fetchCatch = createAsyncThunk("catch/fetchCatch", async () => {
-  const response = await fetch("http://localhost:9000/api/app/catch", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/app/catch`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

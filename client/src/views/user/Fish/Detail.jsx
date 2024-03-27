@@ -20,7 +20,7 @@ function FishDetail() {
           <article>
           <h2>{element.Title}</h2>
           <img
-              src={`http://localhost:9000/img/${element.Src}`}
+              src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`}
               alt={element.Alt}
             />
           <p>{element.Description}</p>

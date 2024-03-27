@@ -21,7 +21,7 @@ function FishList() {
           <article key={element.id}>
             <h3>{element.Title}</h3>
             <img
-              src={`http://localhost:9000/img/${element.Src}`}
+              src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`}
               alt={element.Alt}
             />
             <p>{element.Description}</p>

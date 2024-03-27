@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchFish = createAsyncThunk("fish/fetchFish", async () => {
-  const response = await fetch("http://localhost:9000/api/app/fish", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/app/fish`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -14,7 +14,7 @@ const fetchFish = createAsyncThunk("fish/fetchFish", async () => {
 });
 
 const fetchFishDetail = createAsyncThunk("fish/fetchFishDetail", async (id) => {
-  const response = await fetch(`http://localhost:9000/api/app/fish/${id}`, {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/app/fish/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -12,7 +12,7 @@ app.use(cookieParser())
 
 app.use(
     cors({
-        origin: "http://localhost:5173",
+        origin: process.env.URL,
         methods: ["GET", "POST", "DELETE", "PATCH"], 
         credentials: true, 
     })

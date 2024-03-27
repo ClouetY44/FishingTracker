@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchLake = createAsyncThunk("lake/fetchLake", async () => {
-  const response = await fetch("http://localhost:9000/api/app/lake", {
+  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/app/lake`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

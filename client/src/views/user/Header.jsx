@@ -8,7 +8,7 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    const res = await fetch("http://localhost:9000/api/auth/logout", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

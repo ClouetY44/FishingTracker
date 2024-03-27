@@ -20,7 +20,7 @@ function CatchList(){
             {list.map((element) =>(
                 <article key={element.id}>
                     <h3>{element.Username}</h3>
-                    <img src={`http://localhost:9000/img/${element.Src}`} alt={element.Alt} />
+                    <img src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`} alt={element.Alt} />
                     <p>{element.Description}</p>
                     <Link to={`/liste-des-prises/${element.id}/detail`}>Plus d'infos</Link>
                 </article>
