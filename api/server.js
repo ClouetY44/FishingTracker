@@ -3,7 +3,7 @@ import express from "express";
 import path from "path";
 import cors from "cors";
 import cookieParser from "cookie-parser"
-import router from "./router/index.routes.js"
+import router from "./src/router/index.routes.js"
 
 const app = express();
 const PORT = process.env.LOCAL_PORT;
