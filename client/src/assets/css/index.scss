@@ -16,9 +16,14 @@ body {
   flex-direction: column;
   font-family: $domine;
   height: 100vh;
-  background-color: $color-light;
+  // background-color: $color-light;
+
   color: $color-dark;
   font-size: 1.6rem;
+}
+
+main {
+  background: linear-gradient(to top, $color-dark, $color-light);
 }
 
 #root {
@@ -28,8 +33,7 @@ body {
   width: 100%;
   min-height: 100vh;
   max-width: 767px;
-  background-color: $color-light;
-
+  
   @media (min-width: 768px) {
     max-width: 1023px;
   }
@@ -139,5 +143,68 @@ footer {
     font-size: 3rem;
     padding: 10px;
     margin-top: -5px;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  margin-top: 3rem;
+  padding: 15px;
+  background-color: $color-light;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  color: $color-dark;
+  font-family: $domine;
+  @media (min-width: 768px) {
+    width: 70%;
+  }
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
+  legend {
+      text-align: center;
+      font-size: 2.6rem;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+      font-family: $kotta;
+  }
+  label{
+    font-family: $kotta;
+    font-size: 2rem;
+    padding-bottom: 0.5rem;
+  }
+  input {
+      margin-bottom: 10px;
+      border-radius: 5px;
+      padding: 3px;
+      font-size: 2rem;
+      font-family: $domine;
+  }
+  button[type="submit"] {
+      padding: 10px;
+      margin-top: 1.5rem;
+      border-radius: 5px;
+      background-color: $color-dark;
+      color: $color-light;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: 0;
+      box-shadow: 0px 1px 5px 0 rgba(0, 0, 0, 0.5);
+      font-size: 1.6rem;
+      font-family: $domine;
+  }
+  a {
+      display: block;
+      width: fit-content;
+      margin: 15px auto 0;
+      color: $color-dark;
+      font-weight: bold;
+      font-family: $domine;
+      &:hover {
+          text-decoration: underline;
+      }
   }
 }

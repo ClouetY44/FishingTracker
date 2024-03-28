@@ -41,6 +41,7 @@ function Register() {
   
   return (
     <>
+    <main>
         <form onSubmit={submitHandler}>
             <legend>Création de compte</legend>
             <label htmlFor="username">Nom d'utilisateur :</label>
@@ -64,6 +65,7 @@ function Register() {
 
             {error && <p>{error}</p>}
         </form>
+        </main>
     </>
 );
 
