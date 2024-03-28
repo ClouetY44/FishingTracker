@@ -24,7 +24,7 @@ function Header() {
   return (
     <header>
       <div>
-      <img src="/src/assets/images/logo.png" alt="logo fishing tracker" />
+      <img src="/public/logo.png" alt="logo fishing tracker" />
       <NavLink to={""}><h1>Fishing Tracker</h1></NavLink>
       </div>
       <nav>
