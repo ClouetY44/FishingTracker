@@ -12,7 +12,7 @@ function Footer() {
     <footer>
       <p>© 2024 - Yoann - CLOUET</p>
       <p>
-        <a href="/politique-de-confidentialité">Politique de confidentialité</a>{" "}
+        <a href="/a">Politique de confidentialité</a>{" "}
         | <a href="/conditions-d-utilisation">Conditions d'utilisation</a>
       </p>
       <nav>

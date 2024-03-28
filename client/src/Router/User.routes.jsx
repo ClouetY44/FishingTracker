@@ -26,7 +26,7 @@ function UserRoutes() {
           <Route path="liste-des-étangs/:id/detail" element={<DetailLake />}/>
           <Route path="liste-des-prises" element={<CatchList />}/>
           <Route path="liste-des-prises/:id/detail" element={<DetailCatch />}/>
-          <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}/>
+          <Route path="a" element={<PrivacyPolicy />}/>
           <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
         </Route>
     </Routes>
