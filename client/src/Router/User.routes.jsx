@@ -20,14 +20,14 @@ function UserRoutes() {
           <Route path="" element={<Home />}/>
           <Route path="connexion" element={<Login />}/>
           <Route path="inscription" element={<Register />}/>
+          <Route path="a" element={<PrivacyPolicy />}/>
+          <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
           <Route path="liste-des-poissons" element={<FishList />}/>
           <Route path="liste-des-poissons/:id/detail" element={<FishDetail />}/>
           <Route path="liste-des-étangs" element={<LakeList />}/>
           <Route path="liste-des-étangs/:id/detail" element={<DetailLake />}/>
           <Route path="liste-des-prises" element={<CatchList />}/>
           <Route path="liste-des-prises/:id/detail" element={<DetailCatch />}/>
-          <Route path="a" element={<PrivacyPolicy />}/>
-          <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
         </Route>
     </Routes>
   );
