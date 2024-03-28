@@ -19,56 +19,58 @@ function Register() {
   };
 
   async function submitHandler(e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
-          method:"POST",
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/register`,
+        {
+          method: "POST",
           headers: {
-            "Content-Type":"application/json",
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify(userInfo)
-        })
-        if (response.ok) {
-          navigate("/connexion")
-        } else {
-          const data = await response.json()
-          setError(data.errorMessage)
+          body: JSON.stringify(userInfo),
         }
+      );
+      if (response.ok) {
+        navigate("/connexion");
+      } else {
+        const data = await response.json();
+        setError(data.errorMessage);
+      }
     } catch (error) {
-        setError("Erreur lors de l'incription")
+      setError("Erreur lors de l'incription");
     }
-  } 
-  
+  }
+
   return (
     <>
-    <main>
+      <main>
         <form onSubmit={submitHandler}>
-            <legend>Création de compte</legend>
-            <label htmlFor="username">Nom d'utilisateur :</label>
-            <input
-                ref={usernameRef}
-                type="text"
-                name="username"
-                id="username"
-                onChange={inputChangeHandler}
-            />
+          <legend>Création de compte</legend>
+          <label htmlFor="username">Nom d'utilisateur :</label>
+          <input
+            ref={usernameRef}
+            type="text"
+            name="username"
+            id="username"
+            onChange={inputChangeHandler}
+          />
 
-            <label htmlFor="password">Mot de passe :</label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                onChange={inputChangeHandler}
-            />
+          <label htmlFor="password">Mot de passe :</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={inputChangeHandler}
+          />
 
-            <button type="submit">Créer le compte</button>
+          <button type="submit">Créer le compte</button>
 
-            {error && <p>{error}</p>}
+          {error && <p>{error}</p>}
         </form>
-        </main>
+      </main>
     </>
-);
-
+  );
 }
 
-export default Register
+export default Register;
