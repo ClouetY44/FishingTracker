@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { logout } from "../../store/slice/user";
+import logo from "/logo.png"
 
 function Header() {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ function Header() {
   return (
     <header>
       <div>
-      <img src="/public/logo.png" alt="logo fishing tracker" />
+      <img src={logo} alt="logo fishing tracker" />
       <NavLink to={""}><h1>Fishing Tracker</h1></NavLink>
       </div>
       <nav>
