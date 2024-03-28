@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSquareFacebook,
@@ -12,28 +12,28 @@ function Footer() {
     <footer>
       <p>© 2024 - Yoann - CLOUET</p>
       <p>
-        <a href="/a">Politique de confidentialité</a>{" "}
-        | <a href="/conditions-d-utilisation">Conditions d'utilisation</a>
+      <Link to={"/a"}>Politique de confidentialité</Link>{" "}
+        | <Link to={"/conditions-d-utilisation"}>Conditions d'utilisation</Link>
       </p>
       <nav>
-        <NavLink to={""}>
+        <Link to={""}>
           <FontAwesomeIcon
             icon={faSquareFacebook}
             style={{ color: "#e5e5e5" }}
           />
-        </NavLink>
-        <NavLink to={""}>
+        </Link>
+        <Link to={""}>
           <FontAwesomeIcon icon={faYoutube} style={{ color: "#e5e5e5" }} />
-        </NavLink>
-        <NavLink to={""}>
+        </Link>
+        <Link to={""}>
         <FontAwesomeIcon icon={faSquareXTwitter} style={{ color: "#e5e5e5" }} />
-        </NavLink>
-        <NavLink to={""}>
+        </Link>
+        <Link to={""}>
           <FontAwesomeIcon
             icon={faSquareInstagram}
             style={{ color: "#e5e5e5" }}
           />
-        </NavLink>
+        </Link>
       </nav>
     </footer>
   );
