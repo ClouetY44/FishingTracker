@@ -17,17 +17,17 @@ function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
-          <Route path="" element={<Home />}></Route>
-          <Route path="connexion" element={<Login />}></Route>
-          <Route path="inscription" element={<Register />}></Route>
-          <Route path="liste-des-poissons" element={<FishList />}></Route>
-          <Route path="liste-des-poissons/:id/detail" element={<FishDetail />}></Route>
-          <Route path="liste-des-étangs" element={<LakeList />}></Route>
-          <Route path="liste-des-étangs/:id/detail" element={<DetailLake />}></Route>
-          <Route path="liste-des-prises" element={<CatchList />}></Route>
-          <Route path="liste-des-prises/:id/detail" element={<DetailCatch />}></Route>
-          <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}></Route>
-          <Route path="conditions-d-utilisation" element={<TermsOfUse />}></Route>
+          <Route path="" element={<Home />}/>
+          <Route path="connexion" element={<Login />}/>
+          <Route path="inscription" element={<Register />}/>
+          <Route path="liste-des-poissons" element={<FishList />}/>
+          <Route path="liste-des-poissons/:id/detail" element={<FishDetail />}/>
+          <Route path="liste-des-étangs" element={<LakeList />}/>
+          <Route path="liste-des-étangs/:id/detail" element={<DetailLake />}/>
+          <Route path="liste-des-prises" element={<CatchList />}/>
+          <Route path="liste-des-prises/:id/detail" element={<DetailCatch />}/>
+          <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}/>
+          <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
         </Route>
     </Routes>
   );
