@@ -83,6 +83,7 @@ header {
   align-items: center;
   text-align: center;
 
+
   h1 {
     text-shadow: 1px 1px 0px $color-light;
     color: $color-light;
@@ -91,25 +92,26 @@ header {
   }
 
   div {
-    width: 25%;
+    width: 55%;
     display: flex;
     flex-grow: 1;
     justify-content: flex-start;
     align-items: center;
     img {
-      max-height: 120px;
+      max-height: 8rem;
       display: inline;
+      @media (min-width: 768px) {
+        max-height: 12rem;
+      }
     }
   }
   nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    // margin-right: 3rem;
 
     @media (min-width: 1024px) {
       font-size: 2rem;
-    //   padding-right: 70px;
       flex-direction: row;
     }
 
