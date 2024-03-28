@@ -17,7 +17,6 @@ function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
-        <Route>
           <Route path="" element={<Home />}></Route>
           <Route path="connexion" element={<Login />}></Route>
           <Route path="inscription" element={<Register />}></Route>
@@ -30,7 +29,6 @@ function UserRoutes() {
           <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}></Route>
           <Route path="conditions-d-utilisation" element={<TermsOfUse />}></Route>
         </Route>
-      </Route>
     </Routes>
   );
 }
