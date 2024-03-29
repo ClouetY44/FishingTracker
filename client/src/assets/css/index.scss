@@ -21,7 +21,6 @@ body {
 }
 
 main {
-  margin-top: 140px;
   background: linear-gradient(to top, $color-dark, $color-light);
 }
 
@@ -80,10 +79,6 @@ footer {
 }
 
 header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10;
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -95,7 +90,7 @@ header {
     text-shadow: 1px 1px 0px $color-light;
     color: $color-light;
     font-family: $dancing;
-    font-size: 4.8rem;
+    font-size: 5.6rem;
   }
 
   div {
@@ -105,10 +100,11 @@ header {
     justify-content: flex-start;
     align-items: center;
    img {
-      animation: rotateAnimation 10s 30s;
-      max-height: 8rem;
-      display: inline;
+      animation: rotateAnimation 10s 2s;
+      // max-height: 8rem;
+      display: none;
       @media (min-width: 768px) {
+        display: inline;
         max-height: 12rem;
       }
     }
@@ -128,7 +124,7 @@ header {
 
       50% {
         transform: rotate(60deg);
-        translate: 10rem 5.5rem;
+        translate: 10rem 35rem;
         scale: 1.6;
       }
 
@@ -150,8 +146,9 @@ header {
     align-items: center;
     font-size: 2rem;
 
-    @media (min-width: 1024px) {
+    @media (min-width: 768px) {
       flex-direction: row;
+      padding-right: 3rem;
     }
 
     a {
@@ -159,7 +156,7 @@ header {
       padding: 5px;
       font-family: $kotta;
 
-      @media (min-width: 1024px) {
+      @media (min-width: 768px) {
         padding: 10px;
       }
     }
