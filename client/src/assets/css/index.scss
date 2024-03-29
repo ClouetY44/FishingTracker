@@ -1,5 +1,6 @@
 @use "variables" as *;
 @import "article";
+@import "home";
 
 * {
   margin: 0;
@@ -100,6 +101,7 @@ header {
     justify-content: flex-start;
     align-items: center;
    img {
+    z-index: 1000;
       animation: rotateAnimation 10s 30s;
       display: none;
       @media (min-width: 768px) {
