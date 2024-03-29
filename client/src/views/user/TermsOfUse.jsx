@@ -1,9 +1,9 @@
 function TermsOfUse() {
   return (
-    <main>
-      <section>
-        <article>
+    <main id="termsOfUse">
           <h2>Conditions d'Utilisation</h2>
+          <section>
+          <article className="footer">
           <p>
             En utilisant notre site web, vous acceptez les conditions
             d'utilisation suivantes.
@@ -36,8 +36,8 @@ function TermsOfUse() {
               pourraient résulter de l'utilisation de ce site web.
             </dd>
           </dl>
-        </article>
-      </section>
+          </article>
+          </section>
     </main>
   );
 }

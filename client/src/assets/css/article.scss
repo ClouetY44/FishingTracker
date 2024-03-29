@@ -8,7 +8,7 @@ section {
   flex-wrap: wrap;
   justify-content: center;
 
-  article {
+  .card {
     box-shadow: 2px 2px 10px $color-dark;
     background-color: #fff;
     margin: 0 0 30px;
@@ -65,4 +65,19 @@ section {
       border-radius: 10px;
     }
   }
+}
+
+.footer {
+  box-shadow: 2px 2px 10px $color-dark;
+    background-color: #fff;
+    margin: 0 0 30px;
+    width: 90%;
+    padding: 3rem;
+    border-radius: 10px;
+    @media (min-width: 768px) {
+      width: 75%;
+    }
+    @media (min-width: 1024px) {
+      width: 50%;
+    }
 }

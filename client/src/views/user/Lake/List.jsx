@@ -18,7 +18,7 @@ function LakeList(){
             <h2>Liste des étangs</h2>
             <section>
             {list.map((element) =>(
-                <article key={element.id}>
+                <article className="card" key={element.id}>
                     <h3>{element.Title}</h3>
                     <img src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`} alt={element.Alt} />
                     <p>{element.Description}</p>
