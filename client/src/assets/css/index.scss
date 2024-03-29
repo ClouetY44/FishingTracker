@@ -100,8 +100,7 @@ header {
     justify-content: flex-start;
     align-items: center;
    img {
-      animation: rotateAnimation 10s 2s;
-      // max-height: 8rem;
+      animation: rotateAnimation 10s 30s;
       display: none;
       @media (min-width: 768px) {
         display: inline;

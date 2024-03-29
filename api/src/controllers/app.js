@@ -48,7 +48,7 @@ const getAllFish = async (req,res) => {
 const getFish = async (req,res) => {
     try { 
         const { id } = req.params;
-        const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id WHERE fish.id = ?"
+        const queryFish = "SELECT fish.id, Title, Description, Size, Weight, Season, Longevity, Technical, Secondary_src, Secondary_alt categories_id, pictures_fish.Src, pictures_fish.Alt, categories.Label FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id INNER JOIN categories on categories_id=categories.id WHERE fish.id = ?"
         const fish = await Query.runWithParams(queryFish, [id]);
         res.json(fish);
     } catch (error) {
@@ -116,7 +116,7 @@ const getAllCatch = async (req,res) => {
 const getCatch = async (req,res) => {
     try { 
         const { id } = req.params;
-        const queryCatch = "SELECT * FROM catch WHERE id = ?"
+        const queryCatch = "SELECT catch.id, catch.Description,lake.Title, Length, catch.Weight, Catch_Date, Wind, Released, pictures_catch.Src, pictures_catch.Alt, users.Username, weather.Title AS Weather, method.Title AS Method, fish.Title AS Fish FROM catch INNER JOIN pictures_catch ON catch.id=pictures_catch.catch_id INNER JOIN users ON users_id=users.id INNER JOIN lake on lake_id=lake.id INNER JOIN weather ON weather_id=weather.id INNER JOIN method on method_id=method.id INNER JOIN fish on fish_id=fish.id WHERE catch.id = ?"
         const catchData = await Query.runWithParams(queryCatch, [id]);
         res.json(catchData);
     } catch (error) {
