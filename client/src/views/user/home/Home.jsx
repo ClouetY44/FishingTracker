@@ -28,7 +28,7 @@ function Home() {
           novice ou expert, préparez-vous à plonger dans une aventure
           inoubliable avec Fishing Tracker.
         </p>
-        <div>
+        <div className="carousel">
         <CCarousel controls indicators transition="crossfade">
           {list.map((element) => (
           <CCarouselItem >
