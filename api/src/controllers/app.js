@@ -26,7 +26,7 @@ const getLake = async (req,res) => {
 // FISH
 const getHome = async (req,res) => {
     try {
-        const queryCategorie = "SELECT * FROM ( (SELECT pictures_catch.Src, pictures_catch.Alt FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id ORDER BY RAND() LIMIT 4) UNION (SELECT pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id ORDER BY RAND() LIMIT 4) ) AS random_result ORDER BY RAND();"
+        const queryCategorie = "SELECT * FROM ( (SELECT pictures_catch.Src, pictures_catch.Alt FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id ORDER BY RAND() LIMIT 3) UNION (SELECT pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id ORDER BY RAND() LIMIT 3) UNION (SELECT Secondary_src, Secondary_alt FROM lake ORDER BY RAND() LIMIT 3) ) AS random_result ORDER BY RAND()"
         const categories = await Query.run(queryCategorie)
         res.json(categories)
     } catch {
