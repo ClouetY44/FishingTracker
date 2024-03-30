@@ -23,6 +23,7 @@ body {
 
 main {
   background: linear-gradient(to top, $color-dark, $color-light);
+  line-height: 2.4rem;
 }
 
 #root {
@@ -53,7 +54,7 @@ p {
 h2 {
   text-shadow: 1px 1px 0px $color-dark;
   font-family: $kotta;
-  font-size: 3.5rem;
+  font-size: 3.6rem;
   text-align: center;
   padding-top: 30px;
   padding-bottom: 20px;
@@ -165,7 +166,6 @@ header {
 }
 
 footer {
-  padding-top: 20px;
   text-align: center;
   a {
     color: $color-light;
@@ -175,7 +175,7 @@ footer {
   nav a {
     font-size: 3rem;
     padding: 10px;
-    margin-top: -5px;
+    margin-top: -1.5rem;
   }
 }
 

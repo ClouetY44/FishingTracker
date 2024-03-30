@@ -10,25 +10,18 @@
     background-color: #fff;
     margin: auto;
     width: 90%;
-    height: 90%;
     padding: 3rem;
     margin-top: 3rem;
     border-radius: 10px;
-    @media (min-width: 768px) {
-      width: 85%;
-    }
     @media (min-width: 1024px) {
-      width: 65%;
-    }
+      width: 70%;
     }
     p{
-        padding-top: 5rem;
-        text-align: center;
-        line-height: 2.8rem;
-        padding-bottom: 0.5rem;
-        
+      text-align: center;
+    }
     }
     div{
-        height:50%
+      margin-top: 1rem;
+
     }
 }

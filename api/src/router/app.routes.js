@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getAllLake,getAllFish,getAllArticle,getArticle,getAllMethod,getComment,getFishCategories,getAllCatch, getCatch,getLake,getFish } from "../controllers/app.js";
+import { getAllLake,getAllFish,getAllArticle,getArticle,getAllMethod,getComment,getHome,getAllCatch, getCatch,getLake,getFish } from "../controllers/app.js";
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.get("/comment/:id", getComment)
 router.get("/article/:id", getArticle)
 router.get("/lake/:id", getLake)
 router.get("/fish/:id", getFish)
-router.get("/categories", getFishCategories)
+router.get("/home", getHome)
 router.get("/catch", getAllCatch)
 router.get("/catch/:id", getCatch)
 

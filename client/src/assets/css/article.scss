@@ -13,7 +13,7 @@ section {
     background-color: #fff;
     margin: 0 0 30px;
     width: 95%;
-    padding: 10px;
+    padding: 2rem;
     border-radius: 10px;
     @media (min-width: 1024px) {
       width: 45%;
@@ -23,9 +23,9 @@ section {
     h3 {
       text-shadow: 1px 1px 0px $color-dark;
       font-family: $kotta;
-      font-size: 2.5rem;
+      font-size: 2.8rem;
       color: $color-dark;
-      padding-bottom: 10px;
+      padding-bottom: 2rem;
       margin: 0 auto;
       text-align: center;
     }
@@ -42,7 +42,7 @@ section {
       height: 150px;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 8;
+      -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
       text-overflow: ellipsis;
       margin-top: 15px;
