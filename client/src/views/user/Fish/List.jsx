@@ -12,7 +12,6 @@ function FishList() {
     dispatch(fetchFish());
   }, []);
 
-  console.log(list)
   return (
     <main>
       <h2>Liste des poissons</h2>
