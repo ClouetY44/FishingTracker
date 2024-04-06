@@ -4,6 +4,7 @@ import { updateRole, deleteUser,deleteCatch,deleteArticle,deleteComment } from "
 
 const router = express.Router()
 
+//préfixe : /api/admin
 router.patch("/role", updateRole)
 
 router.delete("/ban", deleteUser)

@@ -1,6 +1,18 @@
 import Query from "../model/Query.js";
 
+// Récupère des données pour la page d'accueil
+const getHome = async (req,res) => {
+    try {
+        const queryCategorie = "SELECT * FROM ( (SELECT pictures_catch.Src, pictures_catch.Alt FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id ORDER BY RAND() LIMIT 3) UNION (SELECT pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id ORDER BY RAND() LIMIT 3) UNION (SELECT Secondary_src, Secondary_alt FROM lake ORDER BY RAND() LIMIT 3) ) AS random_result ORDER BY RAND()"
+        const categories = await Query.run(queryCategorie)
+        res.json(categories)
+    } catch {
+        res.status(500).json({msg: error})
+    }
+}
+
 // LAKE
+// Récupère tous les lacs
 const getAllLake = async (req,res) => {
     try {
         const queryLake = "SELECT * FROM lake"
@@ -12,6 +24,7 @@ const getAllLake = async (req,res) => {
     }
 }
 
+// Récupère un lac spécifique
 const getLake = async (req,res) => {
     try { 
         const { id } = req.params;
@@ -24,16 +37,7 @@ const getLake = async (req,res) => {
 }
 
 // FISH
-const getHome = async (req,res) => {
-    try {
-        const queryCategorie = "SELECT * FROM ( (SELECT pictures_catch.Src, pictures_catch.Alt FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id ORDER BY RAND() LIMIT 3) UNION (SELECT pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id ORDER BY RAND() LIMIT 3) UNION (SELECT Secondary_src, Secondary_alt FROM lake ORDER BY RAND() LIMIT 3) ) AS random_result ORDER BY RAND()"
-        const categories = await Query.run(queryCategorie)
-        res.json(categories)
-    } catch {
-        res.status(500).json({msg: error})
-    }
-}
-
+// Récupère tous les poissons
 const getAllFish = async (req,res) => {
     try {
         const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id"
@@ -45,6 +49,7 @@ const getAllFish = async (req,res) => {
     }
 }
 
+// Récupère un poisson spécifique
 const getFish = async (req,res) => {
     try { 
         const { id } = req.params;
@@ -57,6 +62,7 @@ const getFish = async (req,res) => {
 }
 
 // ARTICLE
+// Récupère tous les articles
 const getAllArticle = async (req,res) => {
     try {
         const queryAllArticle = "SELECT * FROM articles"
@@ -68,6 +74,7 @@ const getAllArticle = async (req,res) => {
     }
 }
 
+// Récupère un article spécifique
 const getArticle = async (req,res) => {
     try { 
         const { id } = req.params;
@@ -80,6 +87,7 @@ const getArticle = async (req,res) => {
 }
 
 // COMMENT
+// Récupère les commentaires pour un article spécifique
 const getComment = async (req,res) => {
     try { 
         const { id } = req.params;
@@ -92,6 +100,7 @@ const getComment = async (req,res) => {
 }
 
 // CONTENT
+// Récupère toutes les méthodes de pêche
 const getAllMethod = async (req,res) => {
     try {
         const queryMethod = "SELECT * FROM method"
@@ -103,6 +112,7 @@ const getAllMethod = async (req,res) => {
     }
 }
 
+// Récupère toutes les captures
 const getAllCatch = async (req,res) => {
     try {
         const queryAllCatch = "SELECT catch.id, Description, users_id, pictures_catch.Src, pictures_catch.Alt, users.Username FROM catch INNER JOIN pictures_catch ON catch.id=pictures_catch.catch_id INNER JOIN users ON users_id=users.id"
@@ -113,6 +123,7 @@ const getAllCatch = async (req,res) => {
     }
 }
 
+// Récupère une capture spécifique
 const getCatch = async (req,res) => {
     try { 
         const { id } = req.params;

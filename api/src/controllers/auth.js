@@ -2,6 +2,7 @@ import Query from "../model/Query.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+// Fonction pour l'enregistrement d'un nouvel utilisateur
 const register = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -9,6 +10,7 @@ const register = async (req, res) => {
     const query = "SELECT * FROM users WHERE username = ?";
     const user = await Query.runWithParams(query, [username]);
 
+    // Si l'utilisateur n'existe pas, procède à l'enregistrement
     if (!user.length) {
       const SALT = Number(process.env.B_SALT);
       const hash = await bcrypt.hash(password, SALT);
@@ -16,6 +18,7 @@ const register = async (req, res) => {
         "INSERT INTO users (username, password, createdAt, roles_id) VALUES (?, ?, NOW(), 3)";
       const user = await Query.runWithParams(query, [username, hash]);
 
+      // Vérifie si l'enregistrement s'est bien passé
       if (user.insertId) {
         res.status(201).json({ message: "Compte créé avec succès" });
         return;
@@ -28,15 +31,20 @@ const register = async (req, res) => {
   }
 };
 
+// Fonction pour la connexion d'un utilisateur existant
 const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const query =
       "SELECT username, password, roles_id FROM users WHERE username = ?";
     const [user] = await Query.runWithParams(query, [username]);
+
+    // Vérifie si l'utilisateur existe et si le mot de passe correspond
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({ message: "Identifiants incorrects" });
     }
+
+     // Détermine le rôle de l'utilisateur en fonction de son rôle_id
     let role;
     switch (user.roles_id) {
       case 1:
@@ -48,11 +56,15 @@ const login = async (req, res) => {
       default:
         role = "pêcheur";
     }
+
+    // Génère un jeton d'authentification JWT avec les informations de l'utilisateur
     const TOKEN = jwt.sign(
       { id: user.id, username, role },
       process.env.SECRET_TOKEN,
       { expiresIn: "2h" }
     );
+
+    // Ajoute le jeton d'authentification comme cookie dans la réponse
     res.cookie("TK_AUTH", TOKEN, {
       httpOnly: true,
       secure: true,
@@ -65,11 +77,13 @@ const login = async (req, res) => {
   }
 };
 
+// Fonction pour la déconnexion d'un utilisateur
 const logout = (req, res) => {
   res.clearCookie("TK_AUTH");
   res.json({ message: "Déconnexion effectuée" });
 };
 
+// Fonction pour vérifier le jeton d'authentification
 const checkToken = (req, res) => {
   res.json({ user: req.user });
 };

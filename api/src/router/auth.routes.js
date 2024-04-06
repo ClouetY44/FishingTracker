@@ -5,6 +5,7 @@ import auth from "../middlewares/auth.js"
 
 const router = express.Router();
 
+//préfixe : /api/auth
 router.post("/register", register);
 router.post("/login", login)
 

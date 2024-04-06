@@ -4,6 +4,7 @@ import { getAllCatch, updateArticle, postArticle,deleteArticle,postComment,updat
 
 const router = express.Router()
 
+//préfixe : /api/owner
 router.get("/report",getAllCatch)
 
 router.post("/article", postArticle)

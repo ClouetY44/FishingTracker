@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { logout } from "../../store/slice/user";
@@ -7,6 +7,7 @@ import logo from "/logo.png";
 function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLogged = useSelector(state => state.user.isLogged);
 
 
   const handleLogout = async () => {
@@ -33,10 +34,11 @@ function Header() {
       </div>
       <nav>
         <NavLink to={"liste-des-étangs"}>Étangs</NavLink>
+        <NavLink to={"admin"}>Admin</NavLink>
         <NavLink to={"liste-des-poissons"}>Poissons</NavLink>
         <NavLink to={"liste-des-prises"}>Prises</NavLink>
-        <NavLink to={"connexion"}>Connexion</NavLink>
-        {/* <button onClick={handleLogout}>Se déconnecter</button> */}
+        {isLogged ? (<NavLink to={"compte"}>Compte</NavLink>):(<NavLink to={"connexion"}>Connexion</NavLink>)}
+        <button onClick={handleLogout}>Se déconnecter</button>
       </nav>
     </header>
   );

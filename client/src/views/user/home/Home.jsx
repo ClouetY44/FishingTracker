@@ -2,8 +2,6 @@ import { CCarousel, CCarouselItem, CImage } from "@coreui/react";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBell } from "@fortawesome/free-regular-svg-icons"
 
 import { fetchHome } from "../../../store/slice/home";
 
@@ -17,7 +15,6 @@ function Home() {
 
   return (
     <main className="home">
-      <dl><FontAwesomeIcon icon={faBell} />  Fishing Tracker vous souhaite de Joyeuses Pâques    <FontAwesomeIcon icon={faBell} /></dl>
       <h2>Fishing Tracker</h2>
       <article>
         <p>

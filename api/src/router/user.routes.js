@@ -4,6 +4,7 @@ import { postCatch, postArticle, postComment, updateCatch, updateArticle, update
 
 const router = express.Router()
 
+//préfixe : /api/user
 router.post("/catch", postCatch)
 router.post("/article", postArticle)
 router.post("/comment", postComment)

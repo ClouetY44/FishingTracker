@@ -1,5 +1,6 @@
 import Query from "../../model/Query.js";
 
+// Fonction pour mettre à jour le rôle d'un utilisateur
 const updateRole = async (req,res) => {
     try {
         const { role, username } = req.body
@@ -11,6 +12,7 @@ const updateRole = async (req,res) => {
     }
 }
 
+// Fonction pour supprimer un utilisateur
 const deleteUser = async (req,res) => {
     try {
         const { username } = req.body
@@ -22,6 +24,7 @@ const deleteUser = async (req,res) => {
     }
 }
 
+// Fonction pour supprimer un élément de la table "catch"
 const deleteCatch = async (req,res) => {
     try {
         const { id } = req.body
@@ -33,6 +36,7 @@ const deleteCatch = async (req,res) => {
     }
 }
 
+// Fonction pour supprimer un article
 const deleteArticle = async (req,res) => {
     try {
         const { id } = req.body
@@ -44,6 +48,7 @@ const deleteArticle = async (req,res) => {
     }
 }
 
+// Fonction pour supprimer un commentaire
 const deleteComment = async (req,res) => {
     try {
         const { id } = req.body

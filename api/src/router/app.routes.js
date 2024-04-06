@@ -4,6 +4,7 @@ import { getAllLake,getAllFish,getAllArticle,getArticle,getAllMethod,getComment,
 
 const router = express.Router();
 
+//préfixe : /api/app
 router.get("/lake", getAllLake);
 router.get("/fish", getAllFish);
 router.get("/method", getAllMethod)

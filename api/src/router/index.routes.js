@@ -12,6 +12,7 @@ import user_routes from "./user.routes.js"
 
 const router = express.Router();
 
+//préfixe : /api
 router.use("/app", app_routes) /*pas de connexion requise*/
 router.use("/auth", auth_routes) /*authentification*/
 router.use("/admin", adminAuth, admin_routes) /*connexion admin requise*/

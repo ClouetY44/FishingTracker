@@ -1,5 +1,6 @@
 import Query from "../../model/Query.js";
 
+// Récupère toutes les captures dans un lac spécifique
 const getAllCatch = async (req,res) => {
     try {
         const { lake } = req.body
@@ -12,6 +13,7 @@ const getAllCatch = async (req,res) => {
 }
 
 // ARTICLE
+// Crée un nouvel article
 const postArticle = async (req,res) => {
     try {
         const { Title, Content, users_id } = req.body
@@ -23,6 +25,7 @@ const postArticle = async (req,res) => {
     }
 }
 
+// Met à jour un article existant
 const updateArticle = async (req,res) => {
     try {
         const { title, content, id } = req.body
@@ -34,6 +37,7 @@ const updateArticle = async (req,res) => {
     }
 }
 
+// Supprime un article
 const deleteArticle = async (req,res) => {
     try {
         const { id } = req.body
@@ -46,6 +50,7 @@ const deleteArticle = async (req,res) => {
 }
 
 // COMMENT
+// Ajoute un nouveau commentaire à un article
 const postComment = async (req,res) => {
     try {
         const { Content, users_id, articles_id } = req.body
@@ -57,6 +62,7 @@ const postComment = async (req,res) => {
     }
 }
 
+// Met à jour un commentaire existant
 const updateComment = async (req,res) => {
     try {
         const { content, users_id, articles_id, id } = req.body
@@ -68,6 +74,7 @@ const updateComment = async (req,res) => {
     }
 }
 
+// Supprime un commentaire
 const deleteComment = async (req,res) => {
     try {
         const { id } = req.body
