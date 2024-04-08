@@ -7,6 +7,8 @@ import { fetchHome } from "../../../store/slice/home";
 
 function Home() {
   const dispatch = useDispatch();
+  const isLogged = useSelector((state) => state.user.isLogged);
+  const username = useSelector((state) => state.user.username);
   const { list } = useSelector((state) => state.home);
 
   useEffect(() => {
@@ -17,6 +19,7 @@ function Home() {
     <main className="home">
       <h2>Fishing Tracker</h2>
       <article>
+        {isLogged ? <p className="welcome">Heureux de vous revoir <span>{username}</span>.</p> : null}
         <p>
           Bienvenue sur Fishing Tracker. Que vous soyez un pêcheur passionné à
           la recherche de nouveaux étangs à découvrir ou un amateur désireux de
@@ -29,13 +32,17 @@ function Home() {
           inoubliable avec Fishing Tracker.
         </p>
         <div className="carousel">
-        <CCarousel controls indicators transition="crossfade">
-          {list.map((element) => (
-          <CCarouselItem >
-            <CImage className="d-block w-100" src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`} alt={element.Alt} />
-          </CCarouselItem>
-          ))}
-        </CCarousel>
+          <CCarousel controls indicators transition="crossfade">
+            {list.map((element) => (
+              <CCarouselItem>
+                <CImage
+                  className="d-block w-100"
+                  src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`}
+                  alt={element.Alt}
+                />
+              </CCarouselItem>
+            ))}
+          </CCarousel>
         </div>
       </article>
     </main>

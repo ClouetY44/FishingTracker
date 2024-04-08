@@ -1,28 +1,11 @@
-import { useDispatch,useSelector } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-import { logout } from "../../store/slice/user";
 import logo from "/logo.png";
 
 function Header() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isLogged = useSelector(state => state.user.isLogged);
-
-
-  const handleLogout = async () => {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-    if (res.ok) {
-      dispatch(logout());
-      navigate("/");
-    }
-  };
+  const isLogged = useSelector((state) => state.user.isLogged);
+  const role = useSelector((state) => state.user.role);
 
   return (
     <header>
@@ -34,11 +17,13 @@ function Header() {
       </div>
       <nav>
         <NavLink to={"liste-des-étangs"}>Étangs</NavLink>
-        <NavLink to={"admin"}>Admin</NavLink>
         <NavLink to={"liste-des-poissons"}>Poissons</NavLink>
         <NavLink to={"liste-des-prises"}>Prises</NavLink>
-        {isLogged ? (<NavLink to={"compte"}>Compte</NavLink>):(<NavLink to={"connexion"}>Connexion</NavLink>)}
-        <button onClick={handleLogout}>Se déconnecter</button>
+        {isLogged && role === "admin" && <NavLink to={"admin"}>Admin</NavLink>}
+        {isLogged && role !== "admin" && (
+          <NavLink to={"compte"}>Compte</NavLink>
+        )}
+        {!isLogged && <NavLink to={"connexion"}>Connexion</NavLink>}
       </nav>
     </header>
   );

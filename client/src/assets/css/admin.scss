@@ -1,9 +1,55 @@
 @use "variables" as *;
 
 .adminPanel{
+    display: flex;
     flex-direction: column;
     padding-bottom: 3rem;
+    @media (min-width: 1024px) {
+        flex-direction: row;
+
+      }
+    article{
+    box-shadow: 2px 2px 10px $color-dark;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    width:80%;
+    margin: 0 auto;
+    @media (min-width: 768px) {
+        width:50%;
+      }
+      @media (min-width: 1024px) {
+        margin: 0 10rem;
+      }
+    }
+    button {
+      width:80%;
+      margin: 0 auto;
+      margin-bottom: 3rem;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: $color-dark;
+      color: $color-light;
+      font-weight: bold;
+      text-transform: uppercase;
+      border: 0;
+      box-shadow: 2px 2px 10px $color-dark;
+      font-size: 1.6rem;
+      font-family: $domine;
+      @media (min-width: 768px) {
+        width:50%;
+      }
+      @media (min-width: 1024px) {
+        width: 40%;
+      }
+  }
+    h2{
+        width: 100%;
+    }
     form{
+        @media (min-width: 1024px) {
+            width: 45%;
+          }
         select{
             margin-bottom: 10px;
             border-radius: 5px;

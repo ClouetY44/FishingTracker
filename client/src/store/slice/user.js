@@ -18,6 +18,7 @@ const userSlice = createSlice({
         logout(state) {
             state.username = "";
             state.isLogged = false;
+            state.role = "";
         }
     },
 });

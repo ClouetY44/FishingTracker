@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 function Register() {
   const usernameRef = useRef();
@@ -65,7 +65,7 @@ function Register() {
           />
 
           <button type="submit">Créer le compte</button>
-
+          <Link to={"/connexion"}>Déja un compte ?</Link>
           {error && <p>{error}</p>}
         </form>
       </main>

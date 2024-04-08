@@ -67,7 +67,7 @@ function Login() {
           />
 
           <button type="submit">Valider</button>
-          <Link to={"/inscription"}>Créer le compte</Link>
+          <Link to={"/inscription"}>Créer un compte</Link>
         {msg && <p>{msg}</p>}
         </form>
       </main>
