@@ -1,0 +1,20 @@
+@use "variables" as *;
+
+.adminPanel{
+    flex-direction: column;
+    padding-bottom: 3rem;
+    form{
+        select{
+            margin-bottom: 10px;
+            border-radius: 5px;
+            padding: 3px;
+            font-family: $domine; 
+        }
+        p{
+            font-size: 2rem;
+            text-align: center;
+            margin-top: 10px;
+            padding-top: 1.5rem;
+        }
+    }
+}

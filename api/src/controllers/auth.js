@@ -70,7 +70,7 @@ const login = async (req, res) => {
       secure: true,
       maxAge: 7200000,
     });
-    res.json({ message: "Connexion réussie", username: user.username, role });
+    res.json({ message: "Connexion réussie", username: user.username, role});
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Erreur serveur, veuillez réessayer" });

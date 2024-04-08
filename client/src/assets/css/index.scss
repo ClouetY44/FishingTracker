@@ -1,6 +1,7 @@
 @use "variables" as *;
 @import "article";
 @import "home";
+@import "admin";
 
 * {
   margin: 0;
@@ -56,8 +57,8 @@ h2 {
   font-family: $kotta;
   font-size: 3.6rem;
   text-align: center;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 img {
@@ -213,7 +214,7 @@ form {
       margin-bottom: 10px;
       border-radius: 5px;
       padding: 3px;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-family: $domine;
   }
   button[type="submit"] {

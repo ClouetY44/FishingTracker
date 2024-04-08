@@ -35,11 +35,11 @@ function Login() {
       );
       if (response.ok) {
         const user = await response.json();
-        dispatch(login(user.username));
+        dispatch(login({ username : user.username, role : user.role}));
         navigate("/");
-      } else setMsg("Erreur de connexion");
+      } else setMsg("Nom d'utilisateur ou mot de passe incorrect");
     } catch (error) {
-      setMsg("Erreur de connexion");
+      setMsg("Erreur serveur");
     }
   };
 
@@ -63,13 +63,13 @@ function Login() {
             type="password"
             name="password"
             id="password"
-            placeholder="Votre nom d'utilisateur"
+            placeholder="Votre mot de passe"
           />
 
           <button type="submit">Valider</button>
           <Link to={"/inscription"}>Créer le compte</Link>
-        </form>
         {msg && <p>{msg}</p>}
+        </form>
       </main>
     </>
   );

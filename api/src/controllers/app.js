@@ -17,7 +17,6 @@ const getAllLake = async (req,res) => {
     try {
         const queryLake = "SELECT * FROM lake"
         const lakes = await Query.run(queryLake)
-        console.log(lakes)
         res.json(lakes)
     } catch {
         res.status(500).json({msg: error})
