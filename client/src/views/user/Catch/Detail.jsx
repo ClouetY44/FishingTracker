@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { fetchCatchDetail } from "../../../store/slice/catch.js";
 

@@ -1,4 +1,29 @@
 import Query from "../../model/Query.js";
+const getUserInfo = async (req,res) => {
+    try {
+        const { username } = req.query
+        const queryInfos = "SELECT Username, Birthdate, Email, CreatedAt FROM users WHERE Username = ?"
+        const infos =await Query.runWithParams(queryInfos, [username])
+        res.json(infos);
+        console.log(infos)
+    } catch {
+        res.status(500).json({msg: error}) 
+    }
+}
+
+const updateInfos = async (req,res) => {
+    try {
+        const { username } = req.query
+        console.log(username)
+        const { birthdate, email } = req.body;
+        const queryInfos = "UPDATE users SET Birthdate = ?, Email = ? WHERE Username = ?"
+        const infos =await Query.runWithParams(queryInfos, [birthdate,email,username])
+        res.json(infos);
+        console.log(infos)
+    } catch {
+        res.status(500).json({msg: "error"}) 
+    }
+}
 
 // CATCH
 // Ajoute une nouvelle capture
@@ -112,4 +137,4 @@ const deleteComment = async (req,res) => {
     }
 }
 
-export {postCatch,postArticle,postComment,updateCatch,updateArticle,updateComment,deleteCatch,deleteArticle,deleteComment}
+export {getUserInfo,updateInfos,postCatch,postArticle,postComment,updateCatch,updateArticle,updateComment,deleteCatch,deleteArticle,deleteComment}

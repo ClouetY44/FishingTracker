@@ -1,14 +1,17 @@
 import express from "express"
 
-import { postCatch, postArticle, postComment, updateCatch, updateArticle, updateComment, deleteCatch, deleteArticle, deleteComment } from "../controllers/user/index.js"
+import { updateInfos ,getUserInfo ,postCatch, postArticle, postComment, updateCatch, updateArticle, updateComment, deleteCatch, deleteArticle, deleteComment } from "../controllers/user/index.js"
 
 const router = express.Router()
 
 //préfixe : /api/user
+router.get("/userInfos", getUserInfo)
+
 router.post("/catch", postCatch)
 router.post("/article", postArticle)
 router.post("/comment", postComment)
 
+router.put("/updateInfos", updateInfos)
 
 router.patch("/catch/update", updateCatch)
 router.patch("/article/update", updateArticle)

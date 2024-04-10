@@ -112,10 +112,26 @@ function Infos() {
 
   return (
     <>
-      {userCount !== null && <p>Nombre d'utilisateurs : {userCount}</p>}
-      {fishCount !== null && <p>Nombre de poissons référencés : {fishCount}</p>}
-      {lakeCount !== null && <p>Nombre d'étangs référencés : {lakeCount}</p>}
-      {catchCount !== null && <p>Nombre de Prises renseignés : {catchCount}</p>}
+      {userCount !== null && (
+        <p>
+          <strong>Nombre d'utilisateurs :</strong> {userCount}
+        </p>
+      )}
+      {fishCount !== null && (
+        <p>
+          <strong>Nombre de poissons référencés :</strong> {fishCount}
+        </p>
+      )}
+      {lakeCount !== null && (
+        <p>
+          <strong>Nombre d'étangs référencés :</strong> {lakeCount}
+        </p>
+      )}
+      {catchCount !== null && (
+        <p>
+          <strong>Nombre de Prises renseignés :</strong> {catchCount}
+        </p>
+      )}
     </>
   );
 }

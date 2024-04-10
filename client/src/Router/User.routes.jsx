@@ -12,7 +12,8 @@ import DetailCatch from "../views/user/Catch/Detail";
 import DetailLake from "../views/user/Lake/Detail";
 import PrivacyPolicy from "../views/user/PrivacyPolicy";
 import TermsOfUse from "../views/user/TermsOfUse";
-import DashBoard from "../views/user/Dashboard/User";
+import Dashboard from "../views/user/Dashboard/Dashboard";
+import UpdateInfo from "../views/user/Dashboard/data/UpdateUser";
 import BackOffice from "../views/admin/BackOffice";
 import ProtectedAdmin from "./ProtectedAdmin";
 import ProtectedUser from "./ProtectedUser";
@@ -25,7 +26,8 @@ function UserRoutes() {
           <Route path="admin" element={<ProtectedAdmin redirectPath={"/connexion"} child={<BackOffice/>}/>}/>
           <Route path="connexion" element={<Login />}/>
           <Route path="inscription" element={<Register />}/>
-          <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<DashBoard/>}/>}/>
+          <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<Dashboard/>}/>}/>
+          <Route path="compte/modification" element={<ProtectedUser redirectPath={"/connexion"} child={<UpdateInfo/>}/>}/>
           <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}/>
           <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
           <Route path="liste-des-poissons" element={<FishList />}/>
