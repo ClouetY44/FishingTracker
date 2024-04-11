@@ -10,7 +10,7 @@ function Header() {
   return (
     <header>
       <div>
-        <img src={logo} alt="logo fishing tracker" />
+      <NavLink to={""}><img src={logo} alt="logo fishing tracker" /></NavLink>
         <NavLink to={""}>
           <h1>Fishing Tracker</h1>
         </NavLink>

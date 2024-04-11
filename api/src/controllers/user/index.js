@@ -1,3 +1,5 @@
+import bcrypt from "bcrypt"
+
 import Query from "../../model/Query.js";
 const getUserInfo = async (req,res) => {
     try {
@@ -6,6 +8,17 @@ const getUserInfo = async (req,res) => {
         const infos =await Query.runWithParams(queryInfos, [username])
         res.json(infos);
         console.log(infos)
+    } catch {
+        res.status(500).json({msg: error}) 
+    }
+}
+
+const getCatch = async (req,res) => {
+    try {
+        const { username } = req.query
+        const queryCatch = "SELECT catch.id AS catch_id, pictures_catch.src, pictures_catch.alt FROM catch JOIN users ON catch.users_id = users.id JOIN pictures_catch ON catch.id = pictures_catch.catch_id WHERE users.username = ?"
+        const userCatch =await Query.runWithParams(queryCatch, [username])
+        res.json(userCatch);
     } catch {
         res.status(500).json({msg: error}) 
     }
@@ -24,6 +37,30 @@ const updateInfos = async (req,res) => {
         res.status(500).json({msg: "error"}) 
     }
 }
+
+const changePassword = async (req, res) => {
+    try {
+      const { username } = req.query;
+      const { currentPassword, newPassword } = req.body;
+      const queryPassword = "SELECT Password FROM users WHERE Username = ?";
+      const user = await Query.runWithParams(queryPassword, [username]);
+      if (!user || user.length === 0) {
+        return res.status(400).json({ msg: "Utilisateur non trouvé" });
+      }
+      const isPasswordMatch = await bcrypt.compare(currentPassword, user[0].Password);
+      if (!isPasswordMatch) {
+        return res.status(401).json({ msg: "Mot de passe actuel incorrect" });
+      }
+      const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+      const queryUpdatePassword = "UPDATE users SET Password = ? WHERE Username = ?";
+      await Query.runWithParams(queryUpdatePassword, [hashedNewPassword, username]);
+  
+      res.json({ msg: "Mot de passe mis à jour avec succès" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ msg: "Erreur serveur" });
+    }
+  };
 
 // CATCH
 // Ajoute une nouvelle capture
@@ -137,4 +174,4 @@ const deleteComment = async (req,res) => {
     }
 }
 
-export {getUserInfo,updateInfos,postCatch,postArticle,postComment,updateCatch,updateArticle,updateComment,deleteCatch,deleteArticle,deleteComment}
+export {getCatch,getUserInfo,updateInfos,changePassword,postCatch,postArticle,postComment,updateCatch,updateArticle,updateComment,deleteCatch,deleteArticle,deleteComment}

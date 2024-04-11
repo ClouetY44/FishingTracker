@@ -1,6 +1,6 @@
 import express from "express"
 
-import {getLake, getFish, getCountUser, getCountFish, getCountLake, getCountCatch, getRole, getUser, updateRole, deleteUser, deleteLake, deleteFish, deleteCatch, deleteArticle, deleteComment } from "../controllers/admin/index.js"
+import {getLake, getFish, getCountUser, getCountFish, getCountLake, getCountCatch, getRole, getUser, updateRole, deleteUser, deleteLake, deleteFish} from "../controllers/admin/index.js"
 
 const router = express.Router()
 
@@ -19,8 +19,5 @@ router.put("/updateRole", updateRole)
 router.delete("/ban", deleteUser)
 router.delete("/deleteLake", deleteLake)
 router.delete("/deleteFish", deleteFish)
-router.delete("/catch", deleteCatch)
-router.delete("/article", deleteArticle)
-router.delete("/comment", deleteComment)
 
 export default router
