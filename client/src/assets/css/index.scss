@@ -87,6 +87,9 @@ header {
   gap: 10px;
   align-items: center;
   text-align: center;
+  @media (min-width: 1024px) {
+    max-height: 14rem;
+  }
 
   h1 {
     text-shadow: 1px 1px 0px $color-light;
