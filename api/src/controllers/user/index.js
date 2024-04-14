@@ -1,177 +1,212 @@
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
 import Query from "../../model/Query.js";
-const getUserInfo = async (req,res) => {
-    try {
-        const { username } = req.query
-        const queryInfos = "SELECT Username, Birthdate, Email, CreatedAt FROM users WHERE Username = ?"
-        const infos =await Query.runWithParams(queryInfos, [username])
-        res.json(infos);
-        console.log(infos)
-    } catch {
-        res.status(500).json({msg: error}) 
-    }
-}
 
-const getCatch = async (req,res) => {
-    try {
-        const { username } = req.query
-        const queryCatch = "SELECT catch.id AS catch_id, pictures_catch.src, pictures_catch.alt FROM catch JOIN users ON catch.users_id = users.id JOIN pictures_catch ON catch.id = pictures_catch.catch_id WHERE users.username = ?"
-        const userCatch =await Query.runWithParams(queryCatch, [username])
-        res.json(userCatch);
-    } catch {
-        res.status(500).json({msg: error}) 
-    }
-}
+// Fonction pour récupérer le nom des methodes de pêche
+const getMethod = async (req, res) => {
+  try {
+    const queryMethod = "SELECT Title FROM method";
+    const method = await Query.run(queryMethod);
+    res.json(method);
+  } catch {
+    res.status(500).json({ msg: error });
+  }
+};
 
-const updateInfos = async (req,res) => {
-    try {
-        const { username } = req.query
-        console.log(username)
-        const { birthdate, email } = req.body;
-        const queryInfos = "UPDATE users SET Birthdate = ?, Email = ? WHERE Username = ?"
-        const infos =await Query.runWithParams(queryInfos, [birthdate,email,username])
-        res.json(infos);
-        console.log(infos)
-    } catch {
-        res.status(500).json({msg: "error"}) 
-    }
-}
+// Fonction pour récupérer les différentes météos
+const getWeather = async (req, res) => {
+  try {
+    const queryWeather = "SELECT Title FROM weather";
+    const weather = await Query.run(queryWeather);
+    res.json(weather);
+  } catch {
+    res.status(500).json({ msg: error });
+  }
+};
 
+// Fonction pour récupérer les noms des étangs
+const getLake = async (req, res) => {
+  try {
+    const queryLake = "SELECT Title FROM lake";
+    const lakes = await Query.run(queryLake);
+    res.json(lakes);
+  } catch {
+    res.status(500).json({ msg: error });
+  }
+};
+
+// Fonction pour récupérer les espèces de poissons
+const getFish = async (req, res) => {
+  try {
+    const queryFish = "SELECT Title FROM fish";
+    const fishes = await Query.run(queryFish);
+    res.json(fishes);
+  } catch {
+    res.status(500).json({ msg: error });
+  }
+};
+
+// Fonction pour récupérer les informations d'un utilisateur
+const getUserInfo = async (req, res) => {
+  try {
+    const { username } = req.query;
+    const queryInfos =
+      "SELECT Username, Birthdate, Email, CreatedAt FROM users WHERE Username = ?";
+    const infos = await Query.runWithParams(queryInfos, [username]);
+    res.json(infos);
+    console.log(infos);
+  } catch {
+    res.status(500).json({ msg: error });
+  }
+};
+
+// Fonction pour récupérer les prises d'un utilisateur
+const getCatch = async (req, res) => {
+  try {
+    const { username } = req.query;
+    const queryCatch =
+      "SELECT catch.id AS catch_id, pictures_catch.src, pictures_catch.alt FROM catch JOIN users ON catch.users_id = users.id JOIN pictures_catch ON catch.id = pictures_catch.catch_id WHERE users.username = ?";
+    const userCatch = await Query.runWithParams(queryCatch, [username]);
+    res.json(userCatch);
+  } catch {
+    res.status(500).json({ msg: error });
+  }
+};
+
+// Fonction pour mettre a jour les données d'un utilisateur
+const updateInfos = async (req, res) => {
+  try {
+    const { username } = req.query;
+    console.log(username);
+    const { birthdate, email } = req.body;
+    const queryInfos =
+      "UPDATE users SET Birthdate = ?, Email = ? WHERE Username = ?";
+    const infos = await Query.runWithParams(queryInfos, [
+      birthdate,
+      email,
+      username,
+    ]);
+    res.json(infos);
+    console.log(infos);
+  } catch {
+    res.status(500).json({ msg: "error" });
+  }
+};
+
+// Fonction pour changer le mot de passe
 const changePassword = async (req, res) => {
-    try {
-      const { username } = req.query;
-      const { currentPassword, newPassword } = req.body;
-      const queryPassword = "SELECT Password FROM users WHERE Username = ?";
-      const user = await Query.runWithParams(queryPassword, [username]);
-      if (!user || user.length === 0) {
-        return res.status(400).json({ msg: "Utilisateur non trouvé" });
-      }
-      const isPasswordMatch = await bcrypt.compare(currentPassword, user[0].Password);
-      if (!isPasswordMatch) {
-        return res.status(401).json({ msg: "Mot de passe actuel incorrect" });
-      }
-      const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-      const queryUpdatePassword = "UPDATE users SET Password = ? WHERE Username = ?";
-      await Query.runWithParams(queryUpdatePassword, [hashedNewPassword, username]);
-  
-      res.json({ msg: "Mot de passe mis à jour avec succès" });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ msg: "Erreur serveur" });
+  try {
+    const { username } = req.query;
+    const { currentPassword, newPassword } = req.body;
+    const queryPassword = "SELECT Password FROM users WHERE Username = ?";
+    const user = await Query.runWithParams(queryPassword, [username]);
+    if (!user || user.length === 0) {
+      return res.status(400).json({ msg: "Utilisateur non trouvé" });
     }
-  };
-
-// CATCH
-// Ajoute une nouvelle capture
-const postCatch = async (req,res) => {
-    try {
-        const { Length, Weight, Description, Wind, Capture, users_id, lake_id, fish_id, weather_id } = req.body
-        const queryCatch = "INSERT INTO catch (id, Length, Weight, Catch_Date, Description, Wind, Capture, users_id, lake_id, fish_id, weather_id) VALUES (NULL,?,?,NOW(),?,?,?,?,?,?,?)"
-        await Query.runWithParams(queryCatch, [Length, Weight, Description, Wind, Capture, users_id, lake_id, fish_id, weather_id])
-        res.json({ message: "Post créé avec succès"});
-    } catch {
-        res.status(500).json({msg: error})
+    const isPasswordMatch = await bcrypt.compare(
+      currentPassword,
+      user[0].Password
+    );
+    if (!isPasswordMatch) {
+      return res.status(401).json({ msg: "Mot de passe actuel incorrect" });
     }
-}
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    const queryUpdatePassword =
+      "UPDATE users SET Password = ? WHERE Username = ?";
+    await Query.runWithParams(queryUpdatePassword, [
+      hashedNewPassword,
+      username,
+    ]);
 
-// Met à jour une capture existante
-const updateCatch = async (req,res) => {
-    try {
-        const { length,weight,description,wind,lake_id,fish_id,weather_id,id } = req.body
-        const query = "UPDATE catch SET Length = ?, Weight = ?, Catch_Date = NOW(), Description = ?, Wind = ?, lake_id = ?, fish_id = ?, weather_id = ? WHERE id = ?"
-        await Query.runWithParams(query, [length,weight,description,wind,lake_id,fish_id,weather_id,id])
-        res.json({ message: "Mise à jour réussi" });
-    } catch {
-        res.status(500).json({msg: "error"})
-    }
-}
+    res.json({ msg: "Mot de passe mis à jour avec succès" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ msg: "Erreur serveur" });
+  }
+};
 
-// Supprime une capture
-const deleteCatch = async (req,res) => {
-    try {
-        const { id } = req.body
-        const query = "DELETE FROM catch WHERE id = ?"
-        await Query.runWithParams(query, [id])
-        res.json({ message: "post supprimé"});
-    } catch {
-        res.status(500).json({msg: "error"})
-    }
-}
+// Fonction pour ajouter une nouvelle prise
+const postCatch = async (req, res) => {
+  try {
+    const {
+      user,
+      lake,
+      fish,
+      weather,
+      method,
+      released,
+      wind,
+      length,
+      weight,
+      description,
+      catch_Date,
+      alt,
+    } = req.body;
 
-// ARTICLE
-// Ajoute un nouvel article
-const postArticle = async (req,res) => {
-    try {
-        const { Title, Content, users_id } = req.body
-        const queryArticle = "INSERT INTO articles (id, Title, Content, PublicationDate, users_id) VALUES (NULL,?,?,NOW(),?)"
-        await Query.runWithParams(queryArticle, [Title, Content, users_id])
-        res.json({ message: "Article créé avec succès"});
-    } catch {
-        res.status(500).json({msg: error}) 
-    }
-}
+    console.log(req.body);
 
-// Met à jour un article existant
-const updateArticle = async (req,res) => {
-    try {
-        const { title, content, id } = req.body
-        const query = "UPDATE articles SET Title = ?, Content = ?, PublicationDate = NOW() WHERE id = ?"
-        await Query.runWithParams(query, [title, content, id])
-        res.json({ message: "Mise à jour réussi" });
-    } catch {
-        res.status(500).json({msg: "error"})
-    }
-}
+    const lakeQuery = "SELECT id FROM lake WHERE Title = ?";
+    const lakeResult = await Query.runWithParams(lakeQuery, [lake]);
+    const lakeId = lakeResult[0].id;
 
-// Supprime un article
-const deleteArticle = async (req,res) => {
-    try {
-        const { id } = req.body
-        const query = "DELETE FROM articles WHERE id = ?"
-        await Query.runWithParams(query, [id])
-        res.json({ message: "article supprimé"});
-    } catch {
-        res.status(500).json({msg: "error"})
-    }
-}
+    const fishQuery = "SELECT id FROM fish WHERE Title = ?";
+    const fishResult = await Query.runWithParams(fishQuery, [fish]);
+    const fishId = fishResult[0].id;
 
-// COMMENT
-// Ajoute un nouveau commentaire à un article
-const postComment = async (req,res) => {
-    try {
-        const { Content, users_id, articles_id } = req.body
-        const queryArticle = "INSERT INTO comment (id, Content, PublicationDate, users_id, articles_id) VALUES (NULL,?,NOW(),?,?)"
-        await Query.runWithParams(queryArticle, [Content, users_id, articles_id])
-        res.json({ message: "Commentaire créé avec succès"});
-    } catch {
-        res.status(500).json({msg: error}) 
-    }
-}
+    const weatherQuery = "SELECT id FROM weather WHERE Title = ?";
+    const weatherResult = await Query.runWithParams(weatherQuery, [weather]);
+    const weatherId = weatherResult[0].id;
+
+    const methodQuery = "SELECT id FROM method WHERE Title = ?";
+    const methodResult = await Query.runWithParams(methodQuery, [method]);
+    const methodId = methodResult[0].id;
+
+    const userQuery = "SELECT id FROM users WHERE Username = ?";
+    const userResult = await Query.runWithParams(userQuery, [user]);
+    const userId = userResult[0].id;
+    console.log(userId);
+
+    const queryCatch =
+      "INSERT INTO catch (Length, Weight, Catch_Date, Description, Wind, Released, users_id, lake_id, fish_id, weather_id, method_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    const catchResult = await Query.runWithParams(queryCatch, [
+      length,
+      weight,
+      catch_Date,
+      description,
+      wind,
+      released,
+      userId,
+      lakeId,
+      fishId,
+      weatherId,
+      methodId,
+    ]);
+
+    const catchId = catchResult.insertId;
+    console.log(catchId);
+    console.log(req.files[0])
+    const srcQuery =
+      "INSERT INTO pictures_catch (Src, Alt, catch_id) VALUES (?, ?, ?)";
+    const srcResult = await Query.runWithParams(srcQuery, [req.files[0].filename, alt, catchId]);
+
+    console.log(srcResult);
+
+    res.json({ message: "Post créé avec succès" });
+  } catch {
+    res.status(500).json({ msg: "Erreur serveur" });
+  }
+};
 
 
-// Met à jour un commentaire existant
-const updateComment = async (req,res) => {
-    try {
-        const { content, users_id, articles_id, id } = req.body
-        const query = "UPDATE comment SET Content = ?, PublicationDate = NOW(), users_id = ?, articles_id = ? WHERE id = ?"
-        await Query.runWithParams(query, [content, users_id, articles_id, id])
-        res.json({ message: "Mise à jour réussi" });
-    } catch {
-        res.status(500).json({msg: "error"})
-    }
-}
 
-// Supprime un commentaire
-const deleteComment = async (req,res) => {
-    try {
-        const { id } = req.body
-        const query = "DELETE FROM comment WHERE id = ?"
-        await Query.runWithParams(query, [id])
-        res.json({ message: "commentaire supprimé"});
-    } catch {
-        res.status(500).json({msg: "error"})
-    }
-}
-
-export {getCatch,getUserInfo,updateInfos,changePassword,postCatch,postArticle,postComment,updateCatch,updateArticle,updateComment,deleteCatch,deleteArticle,deleteComment}
+export {
+  getWeather,
+  getMethod,
+  getFish,
+  getLake,
+  getCatch,
+  getUserInfo,
+  updateInfos,
+  changePassword,
+  postCatch,
+};

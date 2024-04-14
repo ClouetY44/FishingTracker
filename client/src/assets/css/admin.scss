@@ -1,5 +1,8 @@
+// Utilisation des variables et mixins depuis d'autres fichiers
 @use "variables" as *;
+@use "mixins" as *;
 
+//style pour la page de l'administrateur
 .adminPanel{
     display: flex;
     flex-direction: column;
@@ -9,10 +12,10 @@
 
       }
     article{
-    box-shadow: 2px 2px 10px $color-dark;
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
     background-color: #fff;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 1rem;
     width:80%;
     margin: 0 auto;
     @media (min-width: 768px) {
@@ -26,14 +29,14 @@
       width:80%;
       margin: 0 auto;
       margin-bottom: 3rem;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 1rem;
+      border-radius: 0.5rem;
       background-color: $color-dark;
       color: $color-light;
       font-weight: bold;
       text-transform: uppercase;
       border: 0;
-      box-shadow: 2px 2px 10px $color-dark;
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
       font-size: 1.6rem;
       font-family: $domine;
       @media (min-width: 768px) {
@@ -51,15 +54,15 @@
             width: 45%;
           }
         select{
-            margin-bottom: 10px;
-            border-radius: 5px;
-            padding: 3px;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            padding: 0.3rem;
             font-family: $domine; 
         }
         p{
             font-size: 2rem;
             text-align: center;
-            margin-top: 10px;
+            margin-top: 1rem;
             padding-top: 1.5rem;
         }
     }

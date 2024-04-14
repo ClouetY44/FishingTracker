@@ -1,5 +1,8 @@
+// Utilisation des variables et mixins depuis d'autres fichiers
 @use "variables" as *;
+@use "mixins" as *;
 
+// Styles spécifiques à la classe .dashboard
 .dashboard {
   flex-direction: column;
   align-items: center;
@@ -10,29 +13,31 @@
     width: 80%;
     margin: 0 auto;
     margin-bottom: 3rem;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 1rem;
+    border-radius: 0.5rem;
     background-color: $color-dark;
     color: $color-light;
     font-weight: bold;
     text-transform: uppercase;
     border: 0;
-    box-shadow: 2px 2px 10px $color-dark;
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
     font-size: 1.6rem;
     font-family: $domine;
     @media (min-width: 768px) {
-      width: 60%;
+      width: 40%;
     }
     @media (min-width: 1024px) {
-      width: 40%;
+      width: 25%;
     }
   }
 }
+
+// Styles pour les articles
 article {
-  box-shadow: 2px 2px 10px $color-dark;
+  @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
   background-color: #fff;
   width: 80%;
-  border-radius: 10px;
+  border-radius: 1rem;
   margin-bottom: 2rem;
   p {
     margin: 1.6rem;
@@ -48,6 +53,8 @@ article {
     color: $color-dark;
   }
 }
+
+// Styles pour l'article avec le formulaire de modification
 .modifs {
   display: flex;
   flex-direction: column;
@@ -64,14 +71,14 @@ article {
   a {
     width: 80%;
     margin: 0 auto;
-    padding: 10px;
-    border-radius: 5px;
+    padding: 1rem;
+    border-radius: 0.5rem;
     background-color: $color-dark;
     color: $color-light;
     font-weight: bold;
     text-transform: uppercase;
     border: 0;
-    box-shadow: 2px 2px 10px $color-dark;
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
     font-size: 1.6rem;
     font-family: $domine;
     text-align: center;
@@ -84,12 +91,14 @@ article {
   }
 }
 .showInput {
-  box-shadow: 0.2rem 0.2rem 1.2rem $color-dark;
-  border-radius: 10px;
+  @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+  border-radius: 1rem;
   margin: 0 auto;
   margin-top: 1rem;
   width: 50%;
 }
+
+//style pour l'article sur l'affichage des prises
 .catch {
   display: flex;
   flex-direction: row;
@@ -101,14 +110,37 @@ article {
       width: 40%;
     }
   }
+
+  //style pour le link qui envoi sur le formulaire de prise
+  .formCatch {
+    width: 100%;
+    border-radius: 0.5rem;
+    background-color: $color-dark;
+    color: $color-light;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 0;
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+    font-size: 1.6rem;
+    font-family: $domine;
+    text-align: center;
+    margin: 2.5rem 7rem;
+    padding: 1rem;
+    @media (min-width: 768px) {
+      margin: 2.5rem 20rem;
+    }
+    @media (min-width: 768px) {
+      width: 30%;
+    }
+  }
   img {
     width: 100%;
     margin-top: 2rem;
     max-height: 20rem;
-    box-shadow: 0.5rem 0.5rem 1.2rem $color-dark;
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
     object-fit: cover;
     object-position: center;
-    border-radius: 25px;
+    border-radius: 2.5rem;
     @media (min-width: 768px) {
       max-height: 25rem;
     }
@@ -116,4 +148,8 @@ article {
       max-height: 35rem;
     }
   }
+}
+.msg {
+  text-align: center;
+  margin-top: 2rem;
 }

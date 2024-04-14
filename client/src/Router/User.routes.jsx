@@ -17,6 +17,7 @@ import UpdateInfo from "../views/user/Dashboard/data/UpdateUser";
 import BackOffice from "../views/admin/BackOffice";
 import ProtectedAdmin from "./ProtectedAdmin";
 import ProtectedUser from "./ProtectedUser";
+import PostCatch from "../views/user/Catch/Post";
 
 function UserRoutes() {
   return (
@@ -28,6 +29,7 @@ function UserRoutes() {
           <Route path="inscription" element={<Register />}/>
           <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<Dashboard/>}/>}/>
           <Route path="compte/modification" element={<ProtectedUser redirectPath={"/connexion"} child={<UpdateInfo/>}/>}/>
+          <Route path="compte/déposer" element={<ProtectedUser redirectPath={"/connexion"} child={<PostCatch/>}/>}/>
           <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}/>
           <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
           <Route path="liste-des-poissons" element={<FishList />}/>
@@ -36,7 +38,7 @@ function UserRoutes() {
           <Route path="liste-des-étangs/:id/detail" element={<DetailLake />}/>
           <Route path="liste-des-prises" element={<CatchList />}/>
           <Route path="liste-des-prises/:id/detail" element={<DetailCatch />}/>
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<h1>Erreur 404</h1>} />
         </Route>
     </Routes>
   );

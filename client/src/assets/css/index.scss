@@ -1,4 +1,8 @@
+// Utilisation des variables et mixins depuis d'autres fichiers
 @use "variables" as *;
+@use "mixins" as *;
+
+// Importation des styles spécifiques pour chaque section
 @import "article";
 @import "home";
 @import "admin";
@@ -11,10 +15,12 @@
   box-sizing: border-box;
 }
 
+// Définition de la taille de la police de base
 html {
   font-size: 62.5%;
 }
 
+// Styles de base pour le corps du document
 body {
   display: flex;
   flex-direction: column;
@@ -23,11 +29,13 @@ body {
   font-size: 1.6rem;
 }
 
+// Styles de base pour la balise <main>
 main {
   background: linear-gradient(to top, $color-dark, $color-light);
   line-height: 2.4rem;
 }
 
+// Styles pour l'élément ayant l'ID "root"
 #root {
   display: flex;
   flex-direction: column;
@@ -50,7 +58,7 @@ a {
 }
 
 p {
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 h2 {
@@ -74,6 +82,7 @@ footer {
   flex: 1 0 auto;
 }
 
+// Styles pour les en-têtes et pieds de page
 header,
 footer {
   background-color: $color-dark;
@@ -81,15 +90,14 @@ footer {
   padding: 1rem;
 }
 
+// Styles spécifiques pour l'en-tête
 header {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 1rem;
   align-items: center;
   text-align: center;
-  @media (min-width: 1024px) {
-    max-height: 14rem;
-  }
+  max-height: 14rem;
 
   h1 {
     text-shadow: 1px 1px 0px $color-light;
@@ -111,7 +119,7 @@ header {
     img {
       z-index: 1000;
       max-height: 10rem;
-      animation: rotateAnimation 10s 30s;
+      animation: rotateAnimation 10s 15s;
       @media (min-width: 768px) {
         max-height: 12rem;
       }
@@ -159,41 +167,44 @@ header {
 
     a {
       color: $color-light;
-      padding: 5px;
+      padding: 0.5rem;
       font-family: $kotta;
 
       @media (min-width: 768px) {
-        padding: 10px;
+        padding: 1rem;
       }
     }
   }
 }
 
+// Styles spécifiques pour le pied de page
 footer {
   padding-top: 2rem;
   text-align: center;
+  max-height: 16rem;
   a {
     color: $color-light;
-    padding: 5px;
+    padding: 0.5rem;
     font-family: $kotta;
   }
   nav a {
     font-size: 3rem;
-    padding: 10px;
+    padding: 1rem;
     margin-top: -1.5rem;
   }
 }
 
+// Styles pour les formulaires
 form {
   display: flex;
   flex-direction: column;
   width: 90%;
   margin: auto;
   margin-top: 3rem;
-  padding: 15px;
+  padding: 1.5rem;
   background-color: $color-light;
-  box-shadow: 2px 2px 10px $color-dark;
-  border-radius: 15px;
+  @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+  border-radius: 1.5rem;
   color: $color-dark;
   font-family: $domine;
   @media (min-width: 768px) {
@@ -216,29 +227,36 @@ form {
     margin-top: 2rem;
   }
   input {
-    margin-bottom: 10px;
-    border-radius: 5px;
-    padding: 3px;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    padding: 0.4rem;
     font-size: 1.6rem;
     font-family: $domine;
   }
+  select {
+    padding: 0.4rem;
+  }
+  textarea {
+    padding: 0.4rem;
+  }
   button[type="submit"] {
-    padding: 10px;
+    padding: 1rem;
     margin-top: 1.5rem;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     background-color: $color-dark;
     color: $color-light;
     font-weight: bold;
     text-transform: uppercase;
     border: 0;
-    box-shadow: 2px 2px 10px $color-dark;
+
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
     font-size: 1.6rem;
     font-family: $domine;
   }
   a {
     display: block;
     width: fit-content;
-    margin: 15px auto 0;
+    margin: 1.5rem auto 0;
     color: $color-dark;
     font-weight: bold;
     font-family: $domine;
@@ -253,10 +271,10 @@ form {
   dt {
     font-family: $kotta;
     font-weight: bold;
-    margin: 20px 0 5px;
+    margin: 2rem 0 0.5rem;
   }
   ul {
     list-style: circle;
-    padding-left: 40px;
+    padding-left: 4rem;
   }
 }

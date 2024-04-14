@@ -4,6 +4,8 @@ import {getLake, getFish, getCountUser, getCountFish, getCountLake, getCountCatc
 
 const router = express.Router()
 
+// Routes pour l'administrateur
+
 //préfixe : /api/admin
 router.get("/role", getRole)
 router.get("/user", getUser)

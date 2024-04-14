@@ -1,27 +1,23 @@
 import express from "express"
+import uploadFile from "../middlewares/multer.js"
 
-import { getCatch, updateInfos ,getUserInfo, changePassword ,postCatch, postArticle, postComment, updateCatch, updateArticle, updateComment, deleteCatch, deleteArticle, deleteComment } from "../controllers/user/index.js"
+import { getMethod, getWeather, getFish, getLake, getCatch, updateInfos ,getUserInfo, changePassword ,postCatch } from "../controllers/user/index.js"
 
 const router = express.Router()
+
+// Routes pour les utilisateurs
 
 //préfixe : /api/user
 router.get("/userInfos", getUserInfo)
 router.get("/catch", getCatch)
+router.get("/lake", getLake)
+router.get("/fish", getFish)
+router.get("/weather", getWeather)
+router.get("/method", getMethod)
 
-router.post("/catch", postCatch)
-router.post("/article", postArticle)
-router.post("/comment", postComment)
+router.post("/catch", uploadFile, postCatch)
 
 router.put("/updateInfos", updateInfos)
 router.put("/changePassword", changePassword)
-
-router.patch("/catch/update", updateCatch)
-router.patch("/article/update", updateArticle)
-router.patch("/comment/update", updateComment)
-
-
-router.delete("/catch/delete", deleteCatch)
-router.delete("/article/delete", deleteArticle)
-router.delete("/comment/delete", deleteComment)
 
 export default router

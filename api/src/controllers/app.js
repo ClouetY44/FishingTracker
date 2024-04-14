@@ -11,8 +11,7 @@ const getHome = async (req,res) => {
     }
 }
 
-// LAKE
-// Récupère tous les lacs
+// Récupère tous les étangs
 const getAllLake = async (req,res) => {
     try {
         const queryLake = "SELECT * FROM lake"
@@ -35,7 +34,6 @@ const getLake = async (req,res) => {
     }
 }
 
-// FISH
 // Récupère tous les poissons
 const getAllFish = async (req,res) => {
     try {
@@ -57,57 +55,6 @@ const getFish = async (req,res) => {
         res.json(fish);
     } catch (error) {
         console.log(error);
-    }
-}
-
-// ARTICLE
-// Récupère tous les articles
-const getAllArticle = async (req,res) => {
-    try {
-        const queryAllArticle = "SELECT * FROM articles"
-        const articles = await Query.run(queryAllArticle)
-        console.log(articles)
-        res.json(articles)
-    } catch {
-        res.status(500).json({msg: error})
-    }
-}
-
-// Récupère un article spécifique
-const getArticle = async (req,res) => {
-    try { 
-        const { id } = req.params;
-        const queryArticle = "SELECT * FROM articles WHERE id = ?"
-        const article = await Query.runWithParams(queryArticle, [id]);
-        res.json(article);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// COMMENT
-// Récupère les commentaires pour un article spécifique
-const getComment = async (req,res) => {
-    try { 
-        const { id } = req.params;
-        const queryComment = "SELECT * FROM comment WHERE articles_id = ?"
-        const comments = await Query.runWithParams(queryComment, [id]);
-        res.json(comments);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// CONTENT
-// Récupère toutes les méthodes de pêche
-const getAllMethod = async (req,res) => {
-    try {
-        const queryMethod = "SELECT * FROM method"
-        const methods = await Query.run(queryMethod)
-        console.log(methods)
-        res.json(methods)
-    } catch {
-        res.status(500).json({msg: error})
     }
 }
 
@@ -134,4 +81,4 @@ const getCatch = async (req,res) => {
     }
 }
 
-export {getAllLake,getAllFish,getAllMethod,getAllArticle,getComment,getArticle,getHome,getAllCatch,getCatch,getLake,getFish}
+export {getAllLake,getAllFish,getHome,getAllCatch,getCatch,getLake,getFish}

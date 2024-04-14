@@ -1,5 +1,6 @@
 import Query from "../../model/Query.js";
 
+// Fonction pour récupérer le nombre d'utilisateur inscrit
 const getCountUser = async (req, res) => {
   try {
     const queryCount = "SELECT COUNT(*) AS numberOfLines FROM users";
@@ -10,6 +11,7 @@ const getCountUser = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer le nombre d'étang renseignés
 const getCountLake = async (req, res) => {
   try {
     const queryCount = "SELECT COUNT(*) AS numberOfLines FROM lake";
@@ -20,6 +22,7 @@ const getCountLake = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer le nombre de poissons renseignés
 const getCountFish = async (req, res) => {
   try {
     const queryCount = "SELECT COUNT(*) AS numberOfLines FROM fish";
@@ -30,6 +33,7 @@ const getCountFish = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer le nombre de prises renseignés
 const getCountCatch = async (req, res) => {
   try {
     const queryCount = "SELECT COUNT(*) AS numberOfLines FROM catch";
@@ -40,6 +44,7 @@ const getCountCatch = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer les différents rôles
 const getRole = async (req, res) => {
   try {
     const queryRole = "SELECT Label FROM roles;";
@@ -50,6 +55,7 @@ const getRole = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer les utilisateurs
 const getUser = async (req, res) => {
   try {
     const queryUser = "SELECT Username FROM users;";
@@ -60,6 +66,7 @@ const getUser = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer les noms des étangs
 const getLake = async (req, res) => {
   try {
     const queryLake = "SELECT Title FROM lake;";
@@ -70,6 +77,7 @@ const getLake = async (req, res) => {
   }
 };
 
+// Fonction pour récupérer les espèces de poisson
 const getFish = async (req, res) => {
   try {
     const queryFish = "SELECT Title FROM fish;";
@@ -123,6 +131,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Fonction pour supprimer un étang
 const deleteLake = async (req, res) => {
   try {
     const { lake } = req.body;
@@ -140,6 +149,7 @@ const deleteLake = async (req, res) => {
   }
 };
 
+// Fonction pour supprimer un poisson
 const deleteFish = async (req, res) => {
   try {
     const { fish } = req.body;

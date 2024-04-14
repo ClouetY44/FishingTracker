@@ -7,6 +7,7 @@ import { fetchCatch } from "../../../store/slice/catch";
 function CatchList(){
     const dispatch = useDispatch()
     const {list} = useSelector((state) => state.catch)
+    const isLogged = useSelector((state) => state.user.isLogged); 
     
     useEffect(() => {
         dispatch(fetchCatch())
@@ -16,6 +17,7 @@ function CatchList(){
     return (
         <main>
             <h2>Liste des prises</h2>
+            {isLogged ? <Link to={`/compte/déposer`} className="formCatch">Déposer une prise</Link> : null}
             <section>
             {list.map((element) =>(
                 <article className="card" key={element.id}>

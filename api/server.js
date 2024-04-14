@@ -26,6 +26,13 @@ app.use(
     express.static(path.join(process.cwd(), "public/assets/images"))
 );
 
+//Permet la lecture du formData
+app.use(
+    express.urlencoded({
+        extended: false
+    })
+)
+
 // Utiliser le middleware express.json() pour parser les données JSON dans les requêtes
 app.use(express.json());
 
