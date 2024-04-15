@@ -7,7 +7,7 @@ const register = async (req, res) => {
   try {
     const { username, password } = req.body;
 
-    const query = "SELECT * FROM users WHERE username = ?";
+    const query = "SELECT Username FROM users WHERE username = ?";
     const user = await Query.runWithParams(query, [username]);
 
     // Si l'utilisateur n'existe pas, procède à l'enregistrement
@@ -26,7 +26,6 @@ const register = async (req, res) => {
     }
     res.status(409).json({ message: "Compte non créé, veuillez réessayer" });
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Erreur serveur" });
   }
 };
@@ -72,7 +71,6 @@ const login = async (req, res) => {
     });
     res.json({ message: "Connexion réussie", username: user.username, role});
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Erreur serveur, veuillez réessayer" });
   }
 };

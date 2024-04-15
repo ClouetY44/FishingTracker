@@ -3,22 +3,33 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function UpdateInfo() {
-  const [userInfo, setUserInfo] = useState(null);
-  const user = useSelector((state) => state.user);
   const navigate = useNavigate();
+
+  // State pour stocker les informations de l'utilisateur
+  const [userInfo, setUserInfo] = useState(null);
+
+   // Récupération des informations de l'utilisateur connecté depuis Redux
+  const user = useSelector((state) => state.user);
+
+  // State pour afficher les messages d'erreur ou de succès
   const [msg, setMsg] = useState("");
+
+  // State pour gérer l'affichage du mot de passe actuel
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+
+  // State pour gérer l'affichage du nouveau mot de passe
   const [showNewPassword, setShowNewPassword] = useState(false);
 
+  // Références pour les champs de formulaire
   const birthdateRef = useRef();
   const emailRef = useRef();
   const currentPasswordRef = useRef();
   const newPasswordRef = useRef();
 
+  // Effet pour récupérer les informations de l'utilisateur depuis l'API
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        console.log(user);
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/user/userInfos?username=${
             user.username
@@ -34,9 +45,8 @@ function UpdateInfo() {
         if (response.ok) {
           const infos = await response.json();
           setUserInfo(infos[0]);
-          console.log(userInfo);
         } else {
-          setMsg("Erreur lors de la récupération du nombre d'utilisateur");
+          setMsg("Erreur lors de la récupération des infos utilisateur");
         }
       } catch (error) {
         setMsg("Erreur serveur");
@@ -45,6 +55,7 @@ function UpdateInfo() {
     fetchUserInfo();
   }, [user.username]);
 
+  // Fonction pour formater la date
   function formatDate(dateString) {
     if (!dateString) return "";
     const date = new Date(dateString);
@@ -56,6 +67,7 @@ function UpdateInfo() {
     return formattedDate;
   }
 
+  // Fonction pour mettre à jour les informations de l'utilisateur
   const updateUserHandler = async (e) => {
     try {
       e.preventDefault();
@@ -77,7 +89,6 @@ function UpdateInfo() {
       );
       if (response.ok) {
         const updateUser = await response.json();
-        console.log(updateUser);
         navigate("/compte");
       } else
         setMsg(
@@ -87,8 +98,8 @@ function UpdateInfo() {
       setMsg("Erreur serveur");
     }
   };
-  console.log(userInfo);
 
+  // Fonction pour changer le mot de passe de l'utilisateur
   const changePasswordHandler = async (e) => {
     try {
         e.preventDefault()
@@ -108,7 +119,6 @@ function UpdateInfo() {
           })
         if (response.ok) {
             const updatedUser = await response.json()
-            console.log(updatedUser)
             navigate("/compte")
         } else {
             setMsg("Erreur lors du changement de mot de passe")
@@ -118,6 +128,7 @@ function UpdateInfo() {
       } 
   }
 
+  // Rendu du composant
   return (
     <>
       <main>

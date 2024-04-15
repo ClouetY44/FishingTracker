@@ -3,9 +3,9 @@ import Query from "../model/Query.js";
 // Récupère des données pour la page d'accueil
 const getHome = async (req,res) => {
     try {
-        const queryCategorie = "SELECT * FROM ( (SELECT pictures_catch.Src, pictures_catch.Alt FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id ORDER BY RAND() LIMIT 3) UNION (SELECT pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id ORDER BY RAND() LIMIT 3) UNION (SELECT Secondary_src, Secondary_alt FROM lake ORDER BY RAND() LIMIT 3) ) AS random_result ORDER BY RAND()"
-        const categories = await Query.run(queryCategorie)
-        res.json(categories)
+        const querySlider = "SELECT * FROM ( (SELECT pictures_catch.Src, pictures_catch.Alt FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id ORDER BY RAND() LIMIT 3) UNION (SELECT pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id ORDER BY RAND() LIMIT 3) UNION (SELECT Secondary_src, Secondary_alt FROM lake ORDER BY RAND() LIMIT 3) ) AS random_result ORDER BY RAND()"
+        const slider = await Query.run(querySlider)
+        res.json(slider)
     } catch {
         res.status(500).json({msg: error})
     }
@@ -14,7 +14,7 @@ const getHome = async (req,res) => {
 // Récupère tous les étangs
 const getAllLake = async (req,res) => {
     try {
-        const queryLake = "SELECT * FROM lake"
+        const queryLake = "SELECT lake.id, Title, Src, Alt, Description FROM lake ORDER BY Title ASC"
         const lakes = await Query.run(queryLake)
         res.json(lakes)
     } catch {
@@ -26,7 +26,7 @@ const getAllLake = async (req,res) => {
 const getLake = async (req,res) => {
     try { 
         const { id } = req.params;
-        const queryLake = "SELECT * FROM lake WHERE id = ?"
+        const queryLake = "SELECT lake.id, Title, Secondary_src, secondary_alt, Description, Adress, Surface, Private, Period, Number_rods, Night, Lure, Card, Day_price, Year_price FROM lake WHERE lake.id = ?"
         const lake = await Query.runWithParams(queryLake, [id]);
         res.json(lake);
     } catch (error) {
@@ -37,9 +37,8 @@ const getLake = async (req,res) => {
 // Récupère tous les poissons
 const getAllFish = async (req,res) => {
     try {
-        const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id"
+        const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id ORDER BY Title ASC"
         const fishs = await Query.run(queryFish)
-        console.log(fishs)
         res.json(fishs)
     } catch {
         res.status(500).json({msg: error})
@@ -61,7 +60,7 @@ const getFish = async (req,res) => {
 // Récupère toutes les captures
 const getAllCatch = async (req,res) => {
     try {
-        const queryAllCatch = "SELECT catch.id, Description, users_id, pictures_catch.Src, pictures_catch.Alt, users.Username FROM catch INNER JOIN pictures_catch ON catch.id=pictures_catch.catch_id INNER JOIN users ON users_id=users.id"
+        const queryAllCatch = "SELECT catch.id, Description, users_id, pictures_catch.Src, pictures_catch.Alt, users.Username FROM catch INNER JOIN pictures_catch ON catch.id=pictures_catch.catch_id INNER JOIN users ON users_id=users.id ORDER BY Catch_Date DESC"
         const catches = await Query.run(queryAllCatch)
         res.json(catches)
     } catch {

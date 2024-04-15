@@ -5,13 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/slice/user";
 
 function Dashboard() {
+  // State pour stocker les informations de l'utilisateur
   const [userInfo, setUserInfo] = useState(null);
+
+  // State pour stocker les prises de l'utilisateur
   const [userCatch, setUserCatch] = useState(null);
+
+  // Récupération des informations de l'utilisateur connecté depuis Redux
   const user = useSelector((state) => state.user);
+
+   // Dispatch pour effectuer des actions Redux
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
+  // State pour afficher les messages d'erreur ou de succès
   const [msg, setMsg] = useState("");
 
+  const navigate = useNavigate();
+
+  // Effet pour récupérer les informations de l'utilisateur depuis l'API
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
@@ -31,7 +42,7 @@ function Dashboard() {
           const infos = await response.json();
           setUserInfo(infos);
         } else {
-          setMsg("Erreur lors de la récupération du nombre d'utilisateur");
+          setMsg("Erreur lors de la récupération des infos utilisateur");
         }
       } catch (error) {
         setMsg("Erreur serveur");
@@ -40,6 +51,7 @@ function Dashboard() {
     fetchUserInfo();
   }, []);
 
+  // Effet pour récupérer les prises de l'utilisateur depuis l'API
   useEffect(() => {
     const fetchUserCatch = async () => {
       try {
@@ -59,7 +71,7 @@ function Dashboard() {
           const userCatch = await response.json();
           setUserCatch(userCatch);
         } else {
-          setMsg("Erreur lors de la récupération du nombre d'utilisateur");
+          setMsg("Erreur lors de la récupération des prises de l'utilisateur");
         }
       } catch (error) {
         setMsg("Erreur serveur");
@@ -68,6 +80,7 @@ function Dashboard() {
     fetchUserCatch();
   }, []);
 
+  // Fonction pour gérer la déconnexion de l'utilisateur
   const handleLogout = async () => {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/auth/logout`,
@@ -85,11 +98,13 @@ function Dashboard() {
     }
   };
 
+  // Fonction pour formater la date
   function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toISOString().split("T")[0];
   }
 
+  // Rendu du composant
   return (
     <main>
       <section className="dashboard">

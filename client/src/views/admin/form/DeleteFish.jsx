@@ -1,17 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 
 function DeleteFish() {
+  // Référence pour le poisson à supprimer
   const deleteFishRef = useRef();
 
+  // État pour afficher les messages
   const [msg, setMsg] = useState("");
-  const [fishs, setFishes] = useState([])
+  // État pour stocker la liste des poissons
+  const [fishs, setFishes] = useState([]);
 
+  // Utilisation de useEffect pour mettre le focus sur l'élément de sélection de poisson lorsqu'un message est affiché
   useEffect(() => {
     if (deleteFishRef.current) {
       deleteFishRef.current.focus();
     }
   }, [msg]);
 
+  // Utilisation de useEffect pour récupérer la liste des poissons depuis l'API au chargement du composant
   useEffect(() => {
     const fetchFishs = async () => {
       try {
@@ -35,9 +40,10 @@ function DeleteFish() {
         setMsg("Erreur serveur");
       }
     };
-  fetchFishs();
-}, []);
+    fetchFishs();
+  }, []);
 
+  // Fonction pour soumettre la demande de suppression d'un poisson
   const submitDeleteFish = async (e) => {
     try {
       e.preventDefault();
@@ -61,12 +67,14 @@ function DeleteFish() {
     }
   };
 
+  // Utilisation de useEffect pour effacer le message après 10 secondes
   useEffect(() => {
     const timer = setTimeout(() => {
       setMsg("");
     }, 10000);
   });
 
+  // Rendu du composant
   return (
     <form onSubmit={submitDeleteFish}>
       <legend>Supprimer un poisson</legend>

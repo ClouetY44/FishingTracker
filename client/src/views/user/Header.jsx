@@ -4,9 +4,12 @@ import { NavLink } from "react-router-dom";
 import logo from "/logo.png";
 
 function Header() {
+   // Extraction des données de l'état global à l'aide de useSelector
   const isLogged = useSelector((state) => state.user.isLogged);
+  
   const role = useSelector((state) => state.user.role);
 
+  // Rendu du composant
   return (
     <header>
       <div>

@@ -1,17 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 
 function DeleteLake() {
+  // Référence pour l'élément de sélection de l'étang à supprimer
   const deleteLakeRef = useRef();
 
+  // État pour afficher les messages
   const [msg, setMsg] = useState("");
-  const [lakes, setLakes] = useState([])
+  // État pour stocker la liste des étangs
+  const [lakes, setLakes] = useState([]);
 
+  // Utilisation de useEffect pour mettre le focus sur l'étang lorsqu'un message est affiché
   useEffect(() => {
     if (deleteLakeRef.current) {
       deleteLakeRef.current.focus();
     }
   }, [msg]);
 
+  // Utilisation de useEffect pour récupérer la liste des étangs depuis l'API au chargement du composant
   useEffect(() => {
     const fetchLakes = async () => {
       try {
@@ -29,15 +34,16 @@ function DeleteLake() {
           const data = await response.json();
           setLakes(data);
         } else {
-          setMsg("Erreur lors de la récupération des rôles");
+          setMsg("Erreur lors de la récupération des étangs");
         }
       } catch (error) {
         setMsg("Erreur serveur");
       }
     };
-  fetchLakes();
-}, []);
+    fetchLakes();
+  }, []);
 
+  // Fonction pour soumettre la demande de suppression d'un étang
   const submitDeleteLake = async (e) => {
     try {
       e.preventDefault();
@@ -61,12 +67,14 @@ function DeleteLake() {
     }
   };
 
+  // Utilisation de useEffect pour effacer le message après 10 secondes
   useEffect(() => {
     const timer = setTimeout(() => {
       setMsg("");
     }, 10000);
   });
 
+  // Rendu du composant
   return (
     <form onSubmit={submitDeleteLake}>
       <legend>Supprimer un étang</legend>

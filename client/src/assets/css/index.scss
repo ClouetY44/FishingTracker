@@ -62,7 +62,6 @@ p {
 }
 
 h2 {
-  text-shadow: 1px 1px 0px $color-dark;
   font-family: $kotta;
   font-size: 3.6rem;
   text-align: center;
@@ -100,7 +99,6 @@ header {
   max-height: 14rem;
 
   h1 {
-    text-shadow: 1px 1px 0px $color-light;
     color: $color-light;
     font-family: $dancing;
     font-size: 5.6rem;
@@ -119,7 +117,7 @@ header {
     img {
       z-index: 1000;
       max-height: 10rem;
-      animation: rotateAnimation 10s 15s;
+      animation: rotateAnimation 10s 5s;
       @media (min-width: 768px) {
         max-height: 12rem;
       }

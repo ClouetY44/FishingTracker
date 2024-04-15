@@ -5,7 +5,7 @@ import Query from "../../model/Query.js";
 // Fonction pour récupérer le nom des methodes de pêche
 const getMethod = async (req, res) => {
   try {
-    const queryMethod = "SELECT Title FROM method";
+    const queryMethod = "SELECT Title FROM method ORDER BY Title ASC";
     const method = await Query.run(queryMethod);
     res.json(method);
   } catch {
@@ -16,7 +16,7 @@ const getMethod = async (req, res) => {
 // Fonction pour récupérer les différentes météos
 const getWeather = async (req, res) => {
   try {
-    const queryWeather = "SELECT Title FROM weather";
+    const queryWeather = "SELECT Title FROM weather ORDER BY Title ASC";
     const weather = await Query.run(queryWeather);
     res.json(weather);
   } catch {
@@ -27,7 +27,7 @@ const getWeather = async (req, res) => {
 // Fonction pour récupérer les noms des étangs
 const getLake = async (req, res) => {
   try {
-    const queryLake = "SELECT Title FROM lake";
+    const queryLake = "SELECT Title FROM lake ORDER BY Title ASC";
     const lakes = await Query.run(queryLake);
     res.json(lakes);
   } catch {
@@ -38,7 +38,7 @@ const getLake = async (req, res) => {
 // Fonction pour récupérer les espèces de poissons
 const getFish = async (req, res) => {
   try {
-    const queryFish = "SELECT Title FROM fish";
+    const queryFish = "SELECT Title FROM fish ORDER BY Title ASC";
     const fishes = await Query.run(queryFish);
     res.json(fishes);
   } catch {
@@ -54,7 +54,6 @@ const getUserInfo = async (req, res) => {
       "SELECT Username, Birthdate, Email, CreatedAt FROM users WHERE Username = ?";
     const infos = await Query.runWithParams(queryInfos, [username]);
     res.json(infos);
-    console.log(infos);
   } catch {
     res.status(500).json({ msg: error });
   }
@@ -65,7 +64,7 @@ const getCatch = async (req, res) => {
   try {
     const { username } = req.query;
     const queryCatch =
-      "SELECT catch.id AS catch_id, pictures_catch.src, pictures_catch.alt FROM catch JOIN users ON catch.users_id = users.id JOIN pictures_catch ON catch.id = pictures_catch.catch_id WHERE users.username = ?";
+      "SELECT catch.id AS catch_id, pictures_catch.src, pictures_catch.alt FROM catch JOIN users ON catch.users_id = users.id JOIN pictures_catch ON catch.id = pictures_catch.catch_id WHERE users.username = ? ORDER BY Catch_Date";
     const userCatch = await Query.runWithParams(queryCatch, [username]);
     res.json(userCatch);
   } catch {
@@ -77,7 +76,6 @@ const getCatch = async (req, res) => {
 const updateInfos = async (req, res) => {
   try {
     const { username } = req.query;
-    console.log(username);
     const { birthdate, email } = req.body;
     const queryInfos =
       "UPDATE users SET Birthdate = ?, Email = ? WHERE Username = ?";
@@ -87,7 +85,6 @@ const updateInfos = async (req, res) => {
       username,
     ]);
     res.json(infos);
-    console.log(infos);
   } catch {
     res.status(500).json({ msg: "error" });
   }
@@ -120,7 +117,6 @@ const changePassword = async (req, res) => {
 
     res.json({ msg: "Mot de passe mis à jour avec succès" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ msg: "Erreur serveur" });
   }
 };
@@ -143,8 +139,6 @@ const postCatch = async (req, res) => {
       alt,
     } = req.body;
 
-    console.log(req.body);
-
     const lakeQuery = "SELECT id FROM lake WHERE Title = ?";
     const lakeResult = await Query.runWithParams(lakeQuery, [lake]);
     const lakeId = lakeResult[0].id;
@@ -164,7 +158,6 @@ const postCatch = async (req, res) => {
     const userQuery = "SELECT id FROM users WHERE Username = ?";
     const userResult = await Query.runWithParams(userQuery, [user]);
     const userId = userResult[0].id;
-    console.log(userId);
 
     const queryCatch =
       "INSERT INTO catch (Length, Weight, Catch_Date, Description, Wind, Released, users_id, lake_id, fish_id, weather_id, method_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
@@ -183,21 +176,16 @@ const postCatch = async (req, res) => {
     ]);
 
     const catchId = catchResult.insertId;
-    console.log(catchId);
-    console.log(req.files[0])
+
     const srcQuery =
       "INSERT INTO pictures_catch (Src, Alt, catch_id) VALUES (?, ?, ?)";
     const srcResult = await Query.runWithParams(srcQuery, [req.files[0].filename, alt, catchId]);
-
-    console.log(srcResult);
 
     res.json({ message: "Post créé avec succès" });
   } catch {
     res.status(500).json({ msg: "Erreur serveur" });
   }
 };
-
-
 
 export {
   getWeather,

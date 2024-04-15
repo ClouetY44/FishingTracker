@@ -1,16 +1,22 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function Register() {
+  // Référence pour le champ de nom d'utilisateur
   const usernameRef = useRef();
+
+  // État pour stocker les informations de l'utilisateur (nom d'utilisateur et mot de passe)
   const [userInfo, setUserInfo] = useState({ username: "", password: "" });
+  // État pour gérer les erreurs lors de l'inscription
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
+  // Effet pour permettre le changement de focus sur le champ de nom d'utilisateur
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
 
+  // Fonction pour mettre à jour l'état userInfo lorsqu'un champ est modifié
   const inputChangeHandler = (e) => {
     setUserInfo({
       ...userInfo,
@@ -18,6 +24,7 @@ function Register() {
     });
   };
 
+  // Fonction de soumission du formulaire d'inscription
   async function submitHandler(e) {
     e.preventDefault();
     try {
@@ -31,6 +38,7 @@ function Register() {
           body: JSON.stringify(userInfo),
         }
       );
+      // Si l'inscription réussit, l'utilisateur est redirigé vers la page de connexion
       if (response.ok) {
         navigate("/connexion");
       } else {
@@ -42,6 +50,7 @@ function Register() {
     }
   }
 
+  // Rendu du composant
   return (
     <>
       <main>

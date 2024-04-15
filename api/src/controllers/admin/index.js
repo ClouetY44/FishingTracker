@@ -47,7 +47,7 @@ const getCountCatch = async (req, res) => {
 // Fonction pour récupérer les différents rôles
 const getRole = async (req, res) => {
   try {
-    const queryRole = "SELECT Label FROM roles;";
+    const queryRole = "SELECT Label FROM roles";
     const roles = await Query.run(queryRole);
     res.json(roles);
   } catch {
@@ -58,7 +58,7 @@ const getRole = async (req, res) => {
 // Fonction pour récupérer les utilisateurs
 const getUser = async (req, res) => {
   try {
-    const queryUser = "SELECT Username FROM users;";
+    const queryUser = "SELECT Username FROM users ORDER BY Username ASC";
     const users = await Query.run(queryUser);
     res.json(users);
   } catch {
@@ -69,7 +69,7 @@ const getUser = async (req, res) => {
 // Fonction pour récupérer les noms des étangs
 const getLake = async (req, res) => {
   try {
-    const queryLake = "SELECT Title FROM lake;";
+    const queryLake = "SELECT Title FROM lake ORDER BY Title ASC";
     const lakes = await Query.run(queryLake);
     res.json(lakes);
   } catch {
@@ -80,7 +80,7 @@ const getLake = async (req, res) => {
 // Fonction pour récupérer les espèces de poisson
 const getFish = async (req, res) => {
   try {
-    const queryFish = "SELECT Title FROM fish;";
+    const queryFish = "SELECT Title FROM fish ORDER BY Title ASC";
     const fishes = await Query.run(queryFish);
     res.json(fishes);
   } catch {

@@ -35,7 +35,6 @@ const uploadFile = (req, res, next) => {
       }
     },
   }).array("image", 1)(req, res, function (error) {
-    console.log("test1234")
     if (error) {
       return res.status(500).json({ error: error.message });
     }

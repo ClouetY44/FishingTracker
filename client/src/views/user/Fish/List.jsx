@@ -5,13 +5,19 @@ import { Link } from "react-router-dom";
 import { fetchFish } from "../../../store/slice/fish";
 
 function FishList() {
+  // Dispatch pour effectuer des actions Redux
   const dispatch = useDispatch();
+
+  // Sélection de la liste des poissons depuis le state Redux
   const { list } = useSelector((state) => state.fish);
 
+  // Effet pour charger la liste des poissons à partir de l'API
   useEffect(() => {
+    // Appel de l'action Redux pour charger la liste des poissons
     dispatch(fetchFish());
   }, []);
 
+    // Rendu du composant
   return (
     <main>
       <h2>Liste des poissons</h2>

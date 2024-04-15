@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../store/slice/user";
 
 function Login() {
+  // Initialisation des références et états
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const usernameRef = useRef();
@@ -12,10 +13,12 @@ function Login() {
 
   const [msg, setMsg] = useState("");
 
+  // Effet pour définir le focus sur le champ de nom d'utilisateur
   useEffect(() => {
     usernameRef.current.focus();
   }, [msg]);
 
+  // Fonction de soumission du formulaire de connexion
   const submitHandler = async (e) => {
     try {
       e.preventDefault();
@@ -34,8 +37,10 @@ function Login() {
         }
       );
       if (response.ok) {
+        // Si la connexion réussit, l'utilisateur est redirigé vers la page d'accueil
+        // et ses informations sont stockées dans le store Redux
         const user = await response.json();
-        dispatch(login({ username : user.username, role : user.role}));
+        dispatch(login({ username: user.username, role: user.role }));
         navigate("/");
       } else setMsg("Nom d'utilisateur ou mot de passe incorrect");
     } catch (error) {
@@ -43,6 +48,7 @@ function Login() {
     }
   };
 
+  // Rendu du composant
   return (
     <>
       <main>
@@ -68,7 +74,7 @@ function Login() {
 
           <button type="submit">Valider</button>
           <Link to={"/inscription"}>Créer un compte</Link>
-        {msg && <p>{msg}</p>}
+          {msg && <p>{msg}</p>}
         </form>
       </main>
     </>

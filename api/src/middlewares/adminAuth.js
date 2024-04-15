@@ -10,7 +10,6 @@ const authenticateJWT = (req, res, next) => {
     // Vérifier la validité du jeton JWT en le décodant avec la clé secrète
     jwt.verify(TOKEN, process.env.SECRET_TOKEN, (err, decoded) => {
         if(err){
-            console.log(err)
             return res.status(400).json({error:"Problem whith Token"})
         }
 

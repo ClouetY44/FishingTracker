@@ -6,14 +6,22 @@ import { Link } from "react-router-dom";
 import { fetchLakeDetail } from "../../../store/slice/lake";
 
 function DetailLake() {
+  // Récupération de l'ID de l'étang depuis les paramètres de l'URL
   const { id } = useParams();
+
+  // Dispatch pour effectuer des actions Redux
   const dispatch = useDispatch();
+
+  // Sélection des détails de l'étang depuis le state Redux
   const { detail } = useSelector((state) => state.lake);
 
+  // Effet pour charger les détails de l'étang à partir de l'API
   useEffect(() => {
+    // Appel de l'action Redux pour charger les détails de l'étang avec l'ID spécifié
     dispatch(fetchLakeDetail(Number(id)));
   }, [dispatch, Number(id)]);
-  console.log(detail.id);
+
+  // Rendu du composant
   return (
     <main>
       {detail.map((element) => (

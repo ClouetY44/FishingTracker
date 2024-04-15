@@ -48,7 +48,6 @@ article {
     text-align: center;
     padding-top: 2rem;
     margin: 0 auto;
-    text-shadow: 1px 1px 0px $color-dark;
     font-size: 2.8rem;
     color: $color-dark;
   }
@@ -148,6 +147,10 @@ article {
       max-height: 35rem;
     }
   }
+}
+p{
+  width: 100%;
+  text-align: center;
 }
 .msg {
   text-align: center;

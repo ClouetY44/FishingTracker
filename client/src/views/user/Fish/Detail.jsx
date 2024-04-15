@@ -6,13 +6,22 @@ import { Link } from "react-router-dom";
 import { fetchFishDetail } from "../../../store/slice/fish";
 
 function FishDetail() {
+  // Récupération de l'ID du poisson depuis les paramètres de l'URL
   const { id } = useParams();
+
+  // Dispatch pour effectuer des actions Redux
   const dispatch = useDispatch();
+
+  // Sélection du détail du poisson depuis le state Redux
   const { detail } = useSelector((state) => state.fish);
 
+  // Effet pour charger les détails du poisson à partir de l'API
   useEffect(() => {
+    // Appel de l'action Redux pour charger les détails du poisson
     dispatch(fetchFishDetail(Number(id)));
   }, [dispatch, Number(id)]);
+
+  // Rendu du composant
   return (
     <main>
       {detail.map((element) => (
@@ -28,7 +37,7 @@ function FishDetail() {
           <article className="detail">
             <h3>Détail du poisson</h3>
             <ul>
-            <li>
+              <li>
                 <strong>Catégorie:</strong> {element.Label}
               </li>
               <li>
@@ -48,12 +57,12 @@ function FishDetail() {
               </li>
             </ul>
             <img
-              src={`${import.meta.env.VITE_API_URL}/img/${element.Secondary_src}`}
+              src={`${import.meta.env.VITE_API_URL}/img/${
+                element.Secondary_src
+              }`}
               alt={element.Secondary_alt}
             />
-            <Link to={`/liste-des-poissons`}>
-              Retour à la liste
-            </Link>
+            <Link to={`/liste-des-poissons`}>Retour à la liste</Link>
           </article>
         </section>
       ))}

@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
 function Infos() {
+  // Définition des états pour stocker les données
   const [userCount, setUserCount] = useState(null);
   const [fishCount, setFishCount] = useState(null);
   const [lakeCount, setLakeCount] = useState(null);
   const [catchCount, setCatchCount] = useState(null);
   const [msg, setMsg] = useState("");
 
+  // Effet pour récupérer le nombre d'utilisateurs
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -32,6 +34,8 @@ function Infos() {
     };
     fetchUser();
   }, []);
+
+  // Effet pour récupérer le nombre de poissons
   useEffect(() => {
     const fetchFish = async () => {
       try {
@@ -58,6 +62,7 @@ function Infos() {
     fetchFish();
   }, []);
 
+  // Effet pour récupérer le nombre d'étangs
   useEffect(() => {
     const fetchLake = async () => {
       try {
@@ -84,6 +89,7 @@ function Infos() {
     fetchLake();
   }, []);
 
+  // Effet pour récupérer le nombre de prises
   useEffect(() => {
     const fetchCatch = async () => {
       try {
@@ -110,6 +116,7 @@ function Infos() {
     fetchCatch();
   }, []);
 
+  // Rendu du composant avec les statistiques récupérées
   return (
     <>
       {userCount !== null && (

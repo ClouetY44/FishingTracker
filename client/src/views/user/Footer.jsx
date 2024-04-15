@@ -8,6 +8,8 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 function Footer() {
+
+  // Rendu du composant
   return (
     <footer>
       <p>© 2024 - Yoann - CLOUET</p>

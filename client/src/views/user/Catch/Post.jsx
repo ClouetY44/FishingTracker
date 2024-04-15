@@ -2,80 +2,97 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 
 function PostCatch() {
+  // Récupération du nom d'utilisateur à partir du state Redux
   const user = useSelector((state) => state.user.username);
+  // Référence pour l'input du nom de l'étang
   const lakeRef = useRef();
+  // Référence pour l'input du nom du poisson
   const fishRef = useRef();
+  // Référence pour l'input de la météo
   const weatherRef = useRef();
+  // Référence pour l'input de la technique de pêche
   const methodRef = useRef();
+  // Référence pour l'input sur si le poisson a été relâché
   const releasedRef = useRef();
+  // Référence pour l'input sur la force du vent
   const windRef = useRef();
+  // Référence pour l'input de la longueur du poisson
   const lengthRef = useRef();
+  // Référence pour l'input du poids du poisson
   const weightRef = useRef();
+  // Référence pour l'input de la description de la prise
   const descriptionRef = useRef();
+  // Référence pour l'input de la date de la prise
   const catch_DateRef = useRef();
-  // const catchImageRef = useRef()
 
+  // État pour afficher les messages de succès ou d'erreur
   const [msg, setMsg] = useState("");
+  // État pour stocker la liste des étangs
   const [lakes, setLakes] = useState([]);
+  // État pour stocker la liste des poissons
   const [fishs, setFishes] = useState([]);
+  // État pour stocker la liste des conditions météorologiques
   const [weather, setWeather] = useState([]);
+  // État pour stocker la liste des techniques de pêche
   const [method, setMethod] = useState([]);
+  // État pour gérer l'option sélectionnée pour la longueur du poisson
   const [selectedOption, setSelectedOption] = useState("");
+  // État pour gérer l'option sélectionnée pour le poids du poisson
   const [selectedOption2, setSelectedOption2] = useState("");
+  // État pour gérer l'option sélectionnée pour la force du vent
   const [selectedOption3, setSelectedOption3] = useState("");
+  // État pour stocker la description de la prise
   const [description, setDescription] = useState("");
 
-  function formatDate(dateString) {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString("fr-CA", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-    return formattedDate;
-  }
-
+  // Gestionnaire de changement pour la sélection de la longueur du poisson
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   };
 
+  // Gestionnaire de changement pour la sélection du poids du poisson
   const handleChange2 = (event) => {
     setSelectedOption2(event.target.value);
   };
 
+  // Gestionnaire de changement pour la sélection de la force du vent
   const handleChange3 = (event) => {
     setSelectedOption3(event.target.value);
   };
 
+  // Gestionnaire de changement pour la saisie de la description de la prise
   const handleChangeText = (event) => {
     setDescription(event.target.value);
   };
 
+  // Effet pour mettre le focus sur le champ du nom de l'étang lorsqu'un message est affiché
   useEffect(() => {
     if (lakeRef.current) {
       lakeRef.current.focus();
     }
   }, [msg]);
 
+  // Effet pour mettre le focus sur le champ du nom du poisson lorsqu'un message est affiché
   useEffect(() => {
     if (fishRef.current) {
       fishRef.current.focus();
     }
   }, [msg]);
 
+  // Effet pour mettre le focus sur le champ de la météo lorsqu'un message est affiché
   useEffect(() => {
     if (weatherRef.current) {
       weatherRef.current.focus();
     }
   }, [msg]);
 
+  // Effet pour mettre le focus sur le champ de la technique de pêche lorsqu'un message est affiché
   useEffect(() => {
     if (methodRef.current) {
       methodRef.current.focus();
     }
   }, [msg]);
 
+  // Effet pour récupérer la liste des étangs depuis l'API
   useEffect(() => {
     const fetchLakes = async () => {
       try {
@@ -93,7 +110,7 @@ function PostCatch() {
           const data = await response.json();
           setLakes(data);
         } else {
-          setMsg("Erreur lors de la récupération des rôles");
+          setMsg("Erreur lors de la récupération des étangs");
         }
       } catch (error) {
         setMsg("Erreur serveur");
@@ -102,6 +119,7 @@ function PostCatch() {
     fetchLakes();
   }, []);
 
+  // Effet pour récupérer la liste des poissons depuis l'API
   useEffect(() => {
     const fetchFishs = async () => {
       try {
@@ -128,6 +146,7 @@ function PostCatch() {
     fetchFishs();
   }, []);
 
+  // Effet pour récupérer la liste des conditions météorologiques depuis l'API
   useEffect(() => {
     const fetchWeather = async () => {
       try {
@@ -145,7 +164,7 @@ function PostCatch() {
           const data = await response.json();
           setWeather(data);
         } else {
-          setMsg("Erreur lors de la récupération des poissons");
+          setMsg("Erreur lors de la récupération des conditions météos");
         }
       } catch (error) {
         setMsg("Erreur serveur");
@@ -154,6 +173,7 @@ function PostCatch() {
     fetchWeather();
   }, []);
 
+  // Effet pour récupérer la liste des techniques de pêche depuis l'API
   useEffect(() => {
     const fetchMethod = async () => {
       try {
@@ -171,7 +191,7 @@ function PostCatch() {
           const data = await response.json();
           setMethod(data);
         } else {
-          setMsg("Erreur lors de la récupération des poissons");
+          setMsg("Erreur lors de la récupération des techniques de pêche");
         }
       } catch (error) {
         setMsg("Erreur serveur");
@@ -180,51 +200,66 @@ function PostCatch() {
     fetchMethod();
   }, []);
 
+  // Gestionnaire de soumission du formulaire pour poster une prise
   const postCaptureSubmit = async (event) => {
     try {
       event.preventDefault();
-      const formData = new FormData()
-      formData.append("user", user)
-      formData.append("lake", lakeRef.current.value)
-      formData.append("fish", fishRef.current.value)
-      formData.append("weather", weatherRef.current.value)
-      formData.append("method", methodRef.current.value)
-      formData.append("released", releasedRef.current.value)
-      formData.append("wind", windRef.current.value)
-      formData.append("length", lengthRef.current.value)
-      formData.append("weight", weightRef.current.value)
-      formData.append("description", descriptionRef.current.value)
-      formData.append("catch_Date", catch_DateRef.current.value)
-      formData.append("alt", "photo du poisson capturé")
-      formData.append("image", event.target["image"].files[0])
-      // const lake = lakeRef.current.value;
-      // const fish = fishRef.current.value;
-      // const weather = weatherRef.current.value;
-      // const method = methodRef.current.value;
-      // const released = releasedRef.current.value;
-      // const wind = windRef.current.value;
-      // const length = lengthRef.current.value;
-      // const weight = weightRef.current.value;
-      // const description = descriptionRef.current.value;
-      // const catch_Date = catch_DateRef.current.value;
-      // const src = catchImageRef.current.value
-      // const datas = formData
-      // console.log(datas)
-      for (let pair of formData.entries()) {
-        console.log(pair[0]+ ', '+ pair[1]); 
-    }
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/user/catch`,
-      {
-        method: "POST",
-        // headers: {
-        //   "Content-Type": "",
-        // },
-        body: formData,
-        credentials: "include",
-      }
-      )
+      const formData = new FormData();
+
+      // Ajout du nom d'utilisateur dans les données du formulaire
+      formData.append("user", user);
+
+      // Ajout du nom de l'étang dans les données du formulaire
+      formData.append("lake", lakeRef.current.value);
+
+      // Ajout du nom du poisson dans les données du formulaire
+      formData.append("fish", fishRef.current.value);
+
+      // Ajout de la météo dans les données du formulaire
+      formData.append("weather", weatherRef.current.value);
+
+      // Ajout de la technique de pêche dans les données du formulaire
+      formData.append("method", methodRef.current.value);
+
+      // Ajout de l'information de relâchement dans les données du formulaire
+      formData.append("released", releasedRef.current.value);
+
+      // Ajout de la force du vent dans les données du formulaire
+      formData.append("wind", windRef.current.value);
+
+      // Ajout de la longueur du poisson dans les données du formulaire
+      formData.append("length", lengthRef.current.value);
+
+      // Ajout du poids du poisson dans les données du formulaire
+      formData.append("weight", weightRef.current.value);
+
+      // Ajout de la description dans les données du formulaire
+      formData.append("description", descriptionRef.current.value);
+
+      // Ajout de la date de la prise dans les données du formulaire
+      formData.append("catch_Date", catch_DateRef.current.value);
+
+      // Ajout de l'attribut alt pour l'image
+      formData.append("alt", "photo du poisson capturé");
+
+      // Ajout de l'image dans les données du formulaire
+      formData.append("image", event.target["image"].files[0]);
+
+      // Envoi des données du formulaire à l'API pour poster la prise
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/user/catch`,
+        {
+          method: "POST",
+          // headers: {
+          //   "Content-Type": "",
+          // },
+          body: formData,
+          credentials: "include",
+        }
+      );
+      // Vérification de la réussite de la requête
       if (response.ok) {
-        const post = await response.json()
+        const post = await response.json();
         setMsg("Prise déposée avec succès");
       } else setMsg("Echec, la prise n'a pas été déposée");
     } catch (error) {
@@ -232,6 +267,7 @@ function PostCatch() {
     }
   };
 
+  // Rendu du composant
   return (
     <>
       <main>
@@ -337,11 +373,7 @@ function PostCatch() {
             placeholder="Écris ta description ici"
           />
           <label htmlFor="date">Date de la prise :</label>
-          <input
-            type="date"
-            id="date"
-            ref={catch_DateRef}
-          />
+          <input type="date" id="date" ref={catch_DateRef} />
           <label htmlFor="image">Photo de la prise :</label>
           <input
             type="file"
@@ -356,5 +388,4 @@ function PostCatch() {
     </>
   );
 }
-
 export default PostCatch;

@@ -1,17 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 
 function DeleteUser() {
+  // Référence pour l'élément de sélection de l'utilisateur à supprimer
   const deleteUserRef = useRef();
 
+  // État pour afficher les messages
   const [msg, setMsg] = useState("");
-  const [users, setUsers] = useState([])
+  // État pour stocker la liste des utilisateurs
+  const [users, setUsers] = useState([]);
 
+  // Utilisation de useEffect pour mettre le focus sur l'utilisateur lorsqu'un message est affiché
   useEffect(() => {
     if (deleteUserRef.current) {
       deleteUserRef.current.focus();
     }
   }, [msg]);
 
+  // Utilisation de useEffect pour récupérer la liste des utilisateurs depuis l'API au chargement du composant
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -29,15 +34,16 @@ function DeleteUser() {
           const data = await response.json();
           setUsers(data);
         } else {
-          setMsg("Erreur lors de la récupération des rôles");
+          setMsg("Erreur lors de la récupération des utilisateurs");
         }
       } catch (error) {
         setMsg("Erreur serveur");
       }
     };
-  fetchUsers();
-}, []);
+    fetchUsers();
+  }, []);
 
+  // Fonction pour soumettre la demande de suppression d'un utilisateur
   const submitDeleteUser = async (e) => {
     try {
       e.preventDefault();
@@ -61,12 +67,14 @@ function DeleteUser() {
     }
   };
 
+  // Utilisation de useEffect pour effacer le message après 10 secondes
   useEffect(() => {
     const timer = setTimeout(() => {
       setMsg("");
     }, 10000);
   });
 
+  // Rendu du composant
   return (
     <form onSubmit={submitDeleteUser}>
       <legend>Supprimer un utilisateur</legend>

@@ -6,15 +6,25 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchHome } from "../../../store/slice/home";
 
 function Home() {
+  // Dispatch pour effectuer des actions Redux
   const dispatch = useDispatch();
+
+  // Sélection de l'état d'authentification de l'utilisateur depuis le state Redux
   const isLogged = useSelector((state) => state.user.isLogged);
+
+  // Sélection du nom d'utilisateur depuis le state Redux
   const username = useSelector((state) => state.user.username);
+
+  // Sélection de la liste d'images pour le carrousel depuis le state Redux
   const { list } = useSelector((state) => state.home);
 
+  // Effet pour charger les images du carrousel à partir de l'API
   useEffect(() => {
+    // Appel de l'action Redux pour charger la liste d'images du carrousel
     dispatch(fetchHome());
   }, []);
 
+    // Rendu du composant
   return (
     <main className="home">
       <h2>Fishing Tracker</h2>

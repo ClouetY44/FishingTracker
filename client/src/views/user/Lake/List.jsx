@@ -5,14 +5,19 @@ import { Link } from "react-router-dom";
 import { fetchLake } from "../../../store/slice/lake";
 
 function LakeList(){
+    // Dispatch pour effectuer des actions Redux
     const dispatch = useDispatch()
+
+    // Sélection de la liste des étangs depuis le state Redux
     const {list} = useSelector((state) => state.lake)
     
+    // Effet pour charger la liste des étangs à partir de l'API
     useEffect(() => {
+        // Appel de l'action Redux pour charger la liste des étangs
         dispatch(fetchLake())
     }, [])
     
-
+  // Rendu du composant
     return (
         <main>
             <h2>Liste des étangs</h2>

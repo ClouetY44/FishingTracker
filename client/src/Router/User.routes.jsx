@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
+// Import des composants de vue
 import Home from "../views/user/home/Home";
 import UserLayout from "../views/layout/UserLayout";
 import Login from "../views/Auth/Login";
@@ -16,23 +17,29 @@ import Dashboard from "../views/user/Dashboard/Dashboard";
 import UpdateInfo from "../views/user/Dashboard/data/UpdateUser";
 import BackOffice from "../views/admin/BackOffice";
 import ProtectedAdmin from "./ProtectedAdmin";
-// import ProtectedUser from "./ProtectedUser";
+import ProtectedUser from "./ProtectedUser";
 import PostCatch from "../views/user/Catch/Post";
 
+// Définition des routes
 function UserRoutes() {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
           <Route path="" element={<Home />}/>
+
+          {/* Route protégée pour l'interface d'administration */}
           <Route path="admin" element={<ProtectedAdmin redirectPath={"/connexion"} child={<BackOffice/>}/>}/>
+
+          {/* Routes pour l'authentification */}
           <Route path="connexion" element={<Login />}/>
           <Route path="inscription" element={<Register />}/>
-          {/* <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<Dashboard/>}/>}/>
+
+          {/* Routes protégées pour le compte utilisateur */}
+          <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<Dashboard/>}/>}/>
           <Route path="compte/modification" element={<ProtectedUser redirectPath={"/connexion"} child={<UpdateInfo/>}/>}/>
-          <Route path="compte/déposer" element={<ProtectedUser redirectPath={"/connexion"} child={<PostCatch/>}/>}/> */}
-          <Route path="compte" element={<Dashboard/>}/>
-          <Route path="compte/modification" element={<UpdateInfo/>}/>
-          <Route path="compte/déposer" element={<PostCatch/>}/>
+          <Route path="compte/déposer" element={<ProtectedUser redirectPath={"/connexion"} child={<PostCatch/>}/>}/>
+         
+         {/* Routes vers les différents composants communs de l'app */}
           <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}/>
           <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
           <Route path="liste-des-poissons" element={<FishList />}/>
@@ -41,7 +48,7 @@ function UserRoutes() {
           <Route path="liste-des-étangs/:id/detail" element={<DetailLake />}/>
           <Route path="liste-des-prises" element={<CatchList />}/>
           <Route path="liste-des-prises/:id/detail" element={<DetailCatch />}/>
-          <Route path="*" element={<h1>Erreur 404</h1>} />
+          <Route path="*" element={<h2>Erreur 404</h2>} />
         </Route>
     </Routes>
   );

@@ -4,19 +4,26 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { fetchCatchDetail } from "../../../store/slice/catch.js";
 
+// Fonction utilitaire pour formater la date
 function formatDate(dateString) {
   const date = new Date(dateString);
   return date.toISOString().split('T')[0];
 }
 
 function DetailCatch() {
+  // Récupération de l'ID de la prise dans les paramètres de l'URL
   const { id } = useParams();
+  // Dispatch des actions Redux
   const dispatch = useDispatch();
+  // Extraction du détail de la prise depuis le state Redux
   const { detail } = useSelector((state) => state.catch);
 
+  // Effet de chargement des détails de la prise lors du chargement du composant
   useEffect(() => {
     dispatch(fetchCatchDetail(Number(id)));
   }, [dispatch, Number(id)]);
+
+  // Rendu du composant
   return (
     <main>
       {detail.map((element) => (

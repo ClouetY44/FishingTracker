@@ -1,4 +1,6 @@
 function TermsOfUse() {
+
+  // Rendu du composant
   return (
     <main id="termsOfUse">
           <h2>Conditions d'Utilisation</h2>

@@ -1,4 +1,6 @@
 function PrivacyPolicy() {
+
+  // Rendu du composant
   return (
     <main id="privacyPolicy">
       <h2>Politique de Confidentialité</h2>
