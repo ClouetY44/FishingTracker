@@ -16,7 +16,7 @@ import Dashboard from "../views/user/Dashboard/Dashboard";
 import UpdateInfo from "../views/user/Dashboard/data/UpdateUser";
 import BackOffice from "../views/admin/BackOffice";
 import ProtectedAdmin from "./ProtectedAdmin";
-import ProtectedUser from "./ProtectedUser";
+// import ProtectedUser from "./ProtectedUser";
 import PostCatch from "../views/user/Catch/Post";
 
 function UserRoutes() {
@@ -27,9 +27,12 @@ function UserRoutes() {
           <Route path="admin" element={<ProtectedAdmin redirectPath={"/connexion"} child={<BackOffice/>}/>}/>
           <Route path="connexion" element={<Login />}/>
           <Route path="inscription" element={<Register />}/>
-          <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<Dashboard/>}/>}/>
+          {/* <Route path="compte" element={<ProtectedUser redirectPath={"/connexion"} child={<Dashboard/>}/>}/>
           <Route path="compte/modification" element={<ProtectedUser redirectPath={"/connexion"} child={<UpdateInfo/>}/>}/>
-          <Route path="compte/déposer" element={<ProtectedUser redirectPath={"/connexion"} child={<PostCatch/>}/>}/>
+          <Route path="compte/déposer" element={<ProtectedUser redirectPath={"/connexion"} child={<PostCatch/>}/>}/> */}
+          <Route path="compte" element={<Dashboard/>}/>
+          <Route path="compte/modification" element={<UpdateInfo/>}/>
+          <Route path="compte/déposer" element={<PostCatch/>}/>
           <Route path="politique-de-confidentialité" element={<PrivacyPolicy />}/>
           <Route path="conditions-d-utilisation" element={<TermsOfUse />}/>
           <Route path="liste-des-poissons" element={<FishList />}/>
