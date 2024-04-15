@@ -156,7 +156,7 @@ function Dashboard() {
               </Link>
             ))
           ) : (
-            <p>Aucune prise à afficher.</p>
+            <p className="nothing">Aucune prise à afficher.</p>
           )}
         </article>
       </section>
