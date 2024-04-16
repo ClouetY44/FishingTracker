@@ -43,7 +43,7 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Identifiants incorrects" });
     }
 
-     // Détermine le rôle de l'utilisateur en fonction de son rôle_id
+    // Détermine le rôle de l'utilisateur en fonction de son rôle_id
     let role;
     switch (user.roles_id) {
       case 1:
@@ -58,7 +58,7 @@ const login = async (req, res) => {
 
     // Génère un jeton d'authentification JWT avec les informations de l'utilisateur
     const TOKEN = jwt.sign(
-      { id: user.id, username, role },
+      { username, role },
       process.env.SECRET_TOKEN,
       { expiresIn: "2h" }
     );
@@ -69,7 +69,7 @@ const login = async (req, res) => {
       secure: true,
       maxAge: 7200000,
     });
-    res.json({ message: "Connexion réussie", username: user.username, role});
+    res.json({ message: "Connexion réussie", username: user.username, role });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur, veuillez réessayer" });
   }
@@ -83,7 +83,22 @@ const logout = (req, res) => {
 
 // Fonction pour vérifier le jeton d'authentification
 const checkToken = (req, res) => {
-  res.json({ user: req.user });
+  
+  const cookie = req.cookies["TK_AUTH"]
+  if (!cookie) {
+    return res.json({isLogged: false, username: "", role:""});
+  } 
+
+  jwt.verify(cookie, process.env.SECRET_TOKEN, (err, decoded) =>{
+    if(err){
+      return res.json({isLogged: false, username: "", role:""})
+  }
+
+  if (decoded) {
+    return res.json({isLogged: true, username: decoded.username, role:decoded.role})
+  }
+  })
+
 };
 
 export { register, login, logout, checkToken };

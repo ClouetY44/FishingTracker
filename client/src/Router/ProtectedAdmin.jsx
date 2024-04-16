@@ -16,7 +16,7 @@ function ProtectedAdmin({ child, redirectPath }) {
                 }
             );
             const result = await response.json();
-            if (response.ok && result.user.role === "admin") {
+            if (response.ok && result.role === "admin") {
                 setIsAuthenticated(true);
             } else {
                 navigate(redirectPath);
