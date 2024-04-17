@@ -108,6 +108,10 @@ article {
     @media (min-width: 768px) {
       width: 40%;
     }
+    :hover {
+      transform: scale(1.1);
+      transition: transform 0.3s;
+    }
   }
 
   //style pour le link qui envoi sur le formulaire de prise

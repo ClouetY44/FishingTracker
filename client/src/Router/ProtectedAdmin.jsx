@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Composant qui vérifie la connexion de l'administrateur
 function ProtectedAdmin({ child, redirectPath }) {

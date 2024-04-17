@@ -85,7 +85,7 @@ function UserRoutes() {
         <Route path="liste-des-étangs/:id/detail" element={<DetailLake />} />
         <Route path="liste-des-prises" element={<CatchList />} />
         <Route path="liste-des-prises/:id/detail" element={<DetailCatch />} />
-        <Route path="*" element={<h2>Erreur 404</h2>} />
+        <Route path="*" element={<h2 className="page404">Erreur 404</h2>} />
       </Route>
     </Routes>
   );

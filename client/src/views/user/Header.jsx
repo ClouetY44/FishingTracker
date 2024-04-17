@@ -4,7 +4,7 @@ import { useState } from "react";
 import MobileMenu from "./MobileMenu";
 
 import logo from "/logo.png";
-import burger from "/burger.png"
+import burger from "/burger.jpg"
 
 function Header() {
    // Extraction des données de l'état global à l'aide de useSelector
