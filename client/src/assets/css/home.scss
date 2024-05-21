@@ -1,0 +1,54 @@
+// Utilisation des variables et mixins depuis d'autres fichiers
+@use "variables" as *;
+@use "mixins" as *;
+
+// Styles spécifiques à la classe .home
+.home{
+    h2{
+        font-family: $dancing;
+        font-size: 7.6rem;
+    }
+
+    // Styles pour les articles à l'intérieur de .home
+    article{
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+    background-color: #fff;
+    margin: auto;
+    width: 90%;
+    padding: 3rem;
+    border-radius: 1rem;
+    @media (min-width: 1024px) {
+      width: 70%;
+    }
+    p{
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .welcome{
+      font-size: 2.4rem;
+      span{
+        color: rgb(14, 157, 173);
+      }
+    }
+    }
+
+    // Styles pour le carousel
+    .carousel{
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+      img {
+        height: 35rem;
+        object-fit: cover;
+        object-position: center;
+        @media (min-width: 768px) {
+          height: 45rem;
+        }
+        @media (min-width: 1024px) {
+          height: 60rem;
+        }
+      }
+    }
+      // Style pour la div qui contient le carousel
+    div{
+      border-radius: 2.5rem;
+    }
+}

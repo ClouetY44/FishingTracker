@@ -1,0 +1,173 @@
+// Utilisation des variables et mixins depuis d'autres fichiers
+@use "variables" as *;
+@use "mixins" as *;
+
+//style pour les sections
+section {
+  margin: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  //style pour les articles des pages principales
+  .card {
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+    background-color: #fff;
+    margin: 0 0 3rem;
+    width: 95%;
+    padding: 2rem;
+    border-radius: 1rem;
+    @media (min-width: 1024px) {
+      width: 45%;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+    h3 {
+      font-family: $kotta;
+      font-size: 2.8rem;
+      color: $color-dark;
+      padding-bottom: 2rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+    img {
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+      width: 95%;
+      height: 26rem;
+      @media (min-width: 768px) {
+        height: 34rem;
+      }
+      @media (min-width: 1024px) {
+        height: 38rem;
+      }
+      object-fit: cover;
+      object-position: center;
+      margin: auto;
+      border-radius: 25px;
+    }
+    p {
+      height: 15rem;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      text-overflow: ellipsis;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      text-align: justify;
+    }
+    a {
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: $color-light;
+      background-color: $color-dark;
+      padding: 1rem;
+      width: fit-content;
+      margin: 0 auto;
+      margin-bottom: 0.5rem;
+      border-radius: 1rem;
+    }
+  }
+  .footer {
+    margin: 0 0 3rem;
+    width: 90%;
+    padding: 3rem;
+    border-radius: 1rem;
+    @media (min-width: 768px) {
+      width: 75%;
+    }
+    @media (min-width: 1024px) {
+      width: 50%;
+    }
+  }
+
+  //style pour l'article détail
+  .detail {
+    img {
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+      width: 95%;
+      max-height: 50rem;
+      object-fit: cover;
+      object-position: center;
+      margin: auto;
+      border-radius: 2.5rem;
+      margin-top: 1rem;
+    }
+    p{
+      margin-top: 2rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      text-align: justify;
+    }
+    h3 {
+      font-size: 2.5rem;
+      font-family: $kotta;
+      text-align: center;
+      padding-top: 1rem;
+      padding-bottom: 2rem;
+      margin-top: 3rem;
+    }
+    ul {
+      list-style: circle;
+      padding-left: 3.5rem;
+      margin-top: 1.5rem;
+    }
+    li {
+      padding-bottom: 1rem;
+    }
+    a {
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: $color-light;
+      background-color: $color-dark;
+      padding: 1rem;
+      width: 20%;
+      margin: 0 auto;
+      margin-top: 3rem;
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+    }
+    @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+    background-color: #fff;
+    margin: 0 0 2rem;
+    margin-top: 1.5rem;
+    width: 95%;
+    padding: 1rem;
+    border-radius: 1rem;
+    @media (min-width: 1024px) {
+      width: 45%;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+  }
+}
+
+//style pour le bouton pour déposer une prise
+.formCatch {
+  display: block;
+  width: 40%;
+  margin: 1.5rem auto;
+  border-radius: 0.5rem;
+  background-color: $color-dark;
+  color: $color-light;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 0;
+  @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+  font-size: 1.6rem;
+  font-family: $domine;
+  text-align: center;
+  padding: 1rem;
+}
+.flexDetail{
+  @media (min-width: 1024px) {
+    display: flex;
+  }
+}
