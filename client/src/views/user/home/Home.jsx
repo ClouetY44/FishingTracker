@@ -31,7 +31,7 @@ function Home() {
       <article>
         {isLogged ? <p className="welcome">Heureux de vous revoir <span>{username}</span>.</p> : null}
         <p>
-          mBienvenue sur Fishing Tracker. Que vous soyez un pêcheur passionné à
+          Bienvenue sur Fishing Tracker. Que vous soyez un pêcheur passionné à
           la recherche de nouveaux étangs à découvrir ou un amateur désireux de
           partager vos plus belles prises, cette plateforme est conçue pour
           vous. Explorez les lieux de pêche à proximité et découvrez les espèces
