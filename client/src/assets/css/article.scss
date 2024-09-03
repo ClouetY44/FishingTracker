@@ -12,7 +12,9 @@ section {
   justify-content: center;
   
   //style pour les articles des pages principales
-  .card {
+  .card,
+  .cardCatch,
+  .cardLake {
     @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
     background-color: #fff;
     margin: 0 0 3rem;
@@ -72,6 +74,34 @@ section {
       margin-bottom: 0.5rem;
       border-radius: 1rem;
     }
+  }
+  .cardCatch,
+  .cardLake {
+    div{
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 5rem;
+        width: 80%;
+        padding: 0px;
+        @media (min-width: 768px) {
+          width: 45%;
+        }
+        span{
+          font-size: 1.8rem;
+        }
+        span:before{
+          content: "tip";
+          color: #fff;
+        }
+      }
+    }
+  }
   }
   .footer {
     margin: 0 0 3rem;
@@ -147,6 +177,33 @@ section {
       margin-right: 1rem;
     }
   }
+  .filters{
+    .selected {
+      background-color: $color-light;
+      color: $color-dark;
+    }    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    @media (min-width: 768px) {
+      justify-content: center;
+    }
+    button{
+      transition: background-color 0.6s ease, color 0.6s ease;
+      @include custom-box-shadow(0.2rem, 0.2rem, 1rem, $color-dark);
+      color: $color-light;
+      background-color: $color-dark;
+      padding: 1rem;
+      width: 40%;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      @media (min-width: 768px) {
+        width: 15%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+    }
 }
 
 //style pour le bouton pour déposer une prise

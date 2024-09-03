@@ -8,13 +8,13 @@ function Register() {
   // État pour stocker les informations de l'utilisateur (nom d'utilisateur et mot de passe)
   const [userInfo, setUserInfo] = useState({ username: "", password: "" });
   // État pour gérer les erreurs lors de l'inscription
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [msg, setMsg] = useState("");
 
   // Effet pour permettre le changement de focus sur le champ de nom d'utilisateur
   useEffect(() => {
     usernameRef.current.focus();
-  }, []);
+  }, [msg]);
 
   // Fonction pour mettre à jour l'état userInfo lorsqu'un champ est modifié
   const inputChangeHandler = (e) => {
@@ -43,10 +43,10 @@ function Register() {
         navigate("/connexion");
       } else {
         const data = await response.json();
-        setError(data.errorMessage);
+        setMsg(data.message);
       }
     } catch (error) {
-      setError("Erreur lors de l'incription");
+      setMsg("Erreur lors de l'incription");
     }
   }
 
@@ -75,7 +75,7 @@ function Register() {
 
           <button type="submit">Créer le compte</button>
           <Link to={"/connexion"}>Déja un compte ?</Link>
-          {error && <p>{error}</p>}
+          {msg && <p>{msg}</p>}
         </form>
       </main>
     </>

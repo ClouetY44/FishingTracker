@@ -14,6 +14,8 @@ function UpdateInfo() {
   // State pour afficher les messages d'erreur ou de succès
   const [msg, setMsg] = useState("");
 
+  const [msg2, setMsg2] = useState("");
+
   // State pour gérer l'affichage du mot de passe actuel
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
 
@@ -88,14 +90,14 @@ function UpdateInfo() {
         }
       );
       if (response.ok) {
-        const updateUser = await response.json();
         navigate("/compte");
-      } else
-        setMsg(
-          "Erreur lors de la mise à jour des informations de l'utilisateur"
-        );
+      } else {
+        const data = await response.json();
+        setMsg2(
+        data.msg
+      );}
     } catch (error) {
-      setMsg("Erreur serveur");
+      setMsg2("Erreur serveur");
     }
   };
 
@@ -120,8 +122,9 @@ function UpdateInfo() {
         if (response.ok) {
             const updatedUser = await response.json()
             navigate("/compte")
-        } else {
-            setMsg("Erreur lors du changement de mot de passe")
+        } else { 
+            const data = await response.json()
+            setMsg(data.msg)
         }
     } catch (error) {
         setMsg("Erreur serveur");
@@ -148,7 +151,7 @@ function UpdateInfo() {
             ref={emailRef}
             defaultValue={userInfo?.Email}
           />
-          {msg && <p>{msg}</p>}
+          {msg2 && <p>{msg2}</p>}
           <button type="submit">Enregistrer</button>
         </form>
 

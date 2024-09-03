@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  faWater,
+  faCalendarDays,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { fetchCatch } from "../../../store/slice/catch";
 
@@ -17,6 +23,17 @@ function CatchList() {
     dispatch(fetchCatch());
   }, []);
 
+  function formatDate(dateString) {
+    const options = {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    };
+    const date = new Date(dateString);
+    return new Intl.DateTimeFormat("fr-FR", options).format(date);
+  }
+
   // Rendu du composant
   return (
     <main>
@@ -28,13 +45,28 @@ function CatchList() {
       ) : null}
       <section>
         {list.map((element) => (
-          <article className="card" key={element.id}>
+          <article className="cardCatch" key={element.id}>
             <h3>{element.Username}</h3>
             <img
               src={`${import.meta.env.VITE_API_URL}/img/${element.Src}`}
               alt={element.Alt}
             />
-            <p>{element.Description}</p>
+            <div>
+            <p>
+              <FontAwesomeIcon
+                icon={faWater}
+                style={{ color: "#232222" }}
+              />
+              <span>{element.lake_title}</span>
+            </p>
+            <p>
+              <FontAwesomeIcon
+                icon={faCalendarDays}
+                style={{ color: "#232222" }}
+              />
+              <span>{formatDate(element.Catch_Date)}</span>
+            </p>
+            </div>
             <Link to={`/liste-des-prises/${element.id}/detail`}>
               Plus d'infos
             </Link>

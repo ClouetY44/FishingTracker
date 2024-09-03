@@ -7,6 +7,34 @@ const register = async (req, res) => {
   try {
     const { username, password } = req.body;
 
+    // Vérification de la longueur du mot de passe
+    if (password.length < 8) {
+      return res.status(400).json({ message: "Le mot de passe doit contenir au moins 8 caractères" });
+    }
+
+    let hasUpperCase = false;
+    let hasNumber = false;
+
+    // Parcours de chaque caractère du mot de passe
+    for (let i = 0; i < password.length; i++) {
+      const char = password.charAt(i);
+
+      // Vérification s'il s'agit d'une majuscule
+      if (char >= 'A' && char <= 'Z') {
+        hasUpperCase = true;
+      }
+
+      // Vérification s'il s'agit d'un chiffre
+      if (!isNaN(parseInt(char))) {
+        hasNumber = true;
+      }
+    }
+
+    // Vérification de la présence d'au moins une majuscule et un chiffre
+    if (!hasUpperCase || !hasNumber) {
+      return res.status(400).json({ message: "Le mot de passe doit contenir au moins une majuscule et un chiffre" });
+    }
+
     const query = "SELECT Username FROM users WHERE username = ?";
     const user = await Query.runWithParams(query, [username]);
 
@@ -22,9 +50,12 @@ const register = async (req, res) => {
       if (user.insertId) {
         res.status(201).json({ message: "Compte créé avec succès" });
         return;
+      } else {
+        res.status(201).json({ message: "Utilisateur déja existant" });
+        return;
       }
     }
-    res.status(409).json({ message: "Compte non créé, veuillez réessayer" });
+    res.status(409).json({ message: "Utilisateur déja existant" });
   } catch (error) {
     res.status(500).json({ message: "Erreur serveur" });
   }

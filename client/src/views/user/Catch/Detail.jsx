@@ -1,13 +1,19 @@
 import { useEffect } from "react";
-import { useParams,Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { fetchCatchDetail } from "../../../store/slice/catch.js";
 
 // Fonction utilitaire pour formater la date
 function formatDate(dateString) {
+  const options = {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
   const date = new Date(dateString);
-  return date.toISOString().split('T')[0];
+  return new Intl.DateTimeFormat("fr-FR", options).format(date);
 }
 
 function DetailCatch() {
@@ -39,32 +45,47 @@ function DetailCatch() {
           <article className="detail">
             <h3>Détail de la prise</h3>
             <ul>
-              <li>
-                <strong>Étang:</strong> {element.Title}.
-              </li>
-              <li>
-                <strong>Date:</strong> {formatDate(element.Catch_Date)}
-              </li>
-              <li>
-                <strong>Poisson:</strong> {element.Fish}.
-              </li>
-              <li>
-                <strong>Taille:</strong> {element.Length} cm.
-              </li>
-              <li>
-                <strong>Poids:</strong> {element.Weight} kg.
-              </li>
-              <li>
-                <strong>Technique de pêche:</strong> {element.Method}.
-              </li>
-              <li>
-                <strong>Météo:</strong> {element.Weather}
-              </li>
-              <li>
-                <strong>Remis à l'eau:</strong> {element.Released}.
-              </li>
+              {element.Title && (
+                <li>
+                  <strong>Étang:</strong> {element.Title}.
+                </li>
+              )}
+              {element.Catch_Date && (
+                <li>
+                  <strong>Date:</strong> {formatDate(element.Catch_Date)}
+                </li>
+              )}
+              {element.Fish && (
+                <li>
+                  <strong>Poisson:</strong> {element.Fish}.
+                </li>
+              )}
+              {element.Length && element.Length > 0 && (
+                <li>
+                  <strong>Taille:</strong> {element.Length} cm.
+                </li>
+              )}
+              {element.Weight && element.Weight > 0 && (
+                <li>
+                  <strong>Poids:</strong> {element.Weight} kg.
+                </li>
+              )}
+              {element.Method && (
+                <li>
+                  <strong>Technique de pêche:</strong> {element.Method}.
+                </li>
+              )}
+              {element.Weather && (
+                <li>
+                  <strong>Météo:</strong> {element.Weather}
+                </li>
+              )}
+              {element.Released && (
+                <li>
+                  <strong>Remis à l'eau:</strong> {element.Released}.
+                </li>
+              )}
             </ul>
-            <Link to={`/liste-des-prises`}>Retour à la liste</Link>
           </article>
         </section>
       ))}

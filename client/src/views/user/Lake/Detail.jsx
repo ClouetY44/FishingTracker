@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { fetchLakeDetail } from "../../../store/slice/lake";
 
@@ -68,9 +67,6 @@ function DetailLake() {
                 <strong>Prix à l'année:</strong> {element.Year_price} euros.
               </li>
             </ul>
-            <Link to={`/liste-des-étangs`}>
-              Retour à la liste
-            </Link>
           </article>
         </section>
       ))}

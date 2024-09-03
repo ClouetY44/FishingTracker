@@ -86,11 +86,10 @@ const updateInfos = async (req, res) => {
     ]);
     res.json(infos);
   } catch {
-    res.status(500).json({ msg: "error" });
+    res.status(500).json({ msg: "Echec de la mise à jour" });
   }
 };
 
-// Fonction pour changer le mot de passe
 const changePassword = async (req, res) => {
   try {
     const { username } = req.query;
@@ -107,6 +106,35 @@ const changePassword = async (req, res) => {
     if (!isPasswordMatch) {
       return res.status(401).json({ msg: "Mot de passe actuel incorrect" });
     }
+
+    // Vérification de la longueur du nouveau mot de passe
+    if (newPassword.length < 8) {
+      return res.status(400).json({ msg: "Le nouveau mot de passe doit contenir au moins 8 caractères" });
+    }
+
+    let hasUpperCase = false;
+    let hasNumber = false;
+
+    // Parcours de chaque caractère du nouveau mot de passe
+    for (let i = 0; i < newPassword.length; i++) {
+      const char = newPassword.charAt(i);
+
+      // Vérification s'il s'agit d'une majuscule
+      if (char >= 'A' && char <= 'Z') {
+        hasUpperCase = true;
+      }
+
+      // Vérification s'il s'agit d'un chiffre
+      if (!isNaN(parseInt(char))) {
+        hasNumber = true;
+      }
+    }
+
+    // Vérification de la présence d'au moins une majuscule et un chiffre
+    if (!hasUpperCase || !hasNumber) {
+      return res.status(400).json({ msg: "Le nouveau mot de passe doit contenir au moins une majuscule et un chiffre" });
+    }
+
     const hashedNewPassword = await bcrypt.hash(newPassword, 10);
     const queryUpdatePassword =
       "UPDATE users SET Password = ? WHERE Username = ?";
@@ -121,6 +149,7 @@ const changePassword = async (req, res) => {
   }
 };
 
+
 // Fonction pour ajouter une nouvelle prise
 const postCatch = async (req, res) => {
   try {
@@ -131,7 +160,6 @@ const postCatch = async (req, res) => {
       weather,
       method,
       released,
-      wind,
       length,
       weight,
       description,
@@ -160,13 +188,12 @@ const postCatch = async (req, res) => {
     const userId = userResult[0].id;
 
     const queryCatch =
-      "INSERT INTO catch (Length, Weight, Catch_Date, Description, Wind, Released, users_id, lake_id, fish_id, weather_id, method_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+      "INSERT INTO catch (Length, Weight, Catch_Date, Description, Released, users_id, lake_id, fish_id, weather_id, method_id) VALUES (?,?,?,?,?,?,?,?,?,?)";
     const catchResult = await Query.runWithParams(queryCatch, [
       length,
       weight,
       catch_Date,
       description,
-      wind,
       released,
       userId,
       lakeId,

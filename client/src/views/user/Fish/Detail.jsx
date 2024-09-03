@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 
 import { fetchFishDetail } from "../../../store/slice/fish";
 
@@ -62,7 +61,6 @@ function FishDetail() {
               }`}
               alt={element.Secondary_alt}
             />
-            <Link to={`/liste-des-poissons`}>Retour à la liste</Link>
           </article>
         </section>
       ))}

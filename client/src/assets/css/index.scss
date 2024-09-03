@@ -65,7 +65,7 @@ p {
 
 h2 {
   font-family: $kotta;
-  font-size: 3.6rem;
+  font-size: 4.2rem;
   text-align: center;
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -121,7 +121,7 @@ header {
         max-height: 12rem;
         display: inline;
       }
-      &:hover{
+      &:hover {
         animation-play-state: paused;
       }
     }
@@ -150,7 +150,7 @@ header {
       }
     }
   }
-  #burger{
+  #burger {
     max-width: 6rem;
     cursor: pointer;
     display: flex;
@@ -191,7 +191,7 @@ header {
   }
 }
 
-#mobile-menu{
+#mobile-menu {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -202,10 +202,10 @@ header {
   @media (min-width: 768px) {
     display: none;
   }
-  a:first-child{
-    padding-top: .5rem;
+  a:first-child {
+    padding-top: 0.5rem;
   }
-  a{
+  a {
     font-family: $kotta;
     width: 100%;
     text-align: center;
@@ -214,9 +214,9 @@ header {
     color: $color-dark;
     font-size: 2.5rem;
     transition: all;
-    transition-duration: 300ms;
-    
-    &:hover{
+    transition-duration: 400ms;
+
+    &:hover {
       background-color: $color-dark;
       color: $color-light;
     }
@@ -272,6 +272,16 @@ form {
     padding-bottom: 0.5rem;
     margin-top: 2rem;
   }
+  .required::after {
+    content: " *";
+    color: red;
+  }
+  span {
+    text-align: center;
+    span {
+      color: red;
+    }
+  }
   input {
     margin-bottom: 1rem;
     border-radius: 0.5rem;
@@ -310,7 +320,7 @@ form {
       text-decoration: underline;
     }
   }
-  p{
+  p {
     padding-top: 0.5rem;
     color: red;
     font-size: 2rem;

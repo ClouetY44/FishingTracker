@@ -11,6 +11,9 @@ import DeleteLake from "./form/DeleteLake";
 import DeleteFish from "./form/DeleteFish";
 // Composant pour afficher des informations générales
 import Infos from "./Infos";
+
+import PasswordChange from "./form/PasswordChange";
+
 // Action Redux pour la déconnexion de l'utilisateur
 import { logout } from "../../store/slice/user";
 
@@ -46,9 +49,10 @@ function BackOffice() {
         <article>
           <Infos />
         </article>
-        <DeleteUser />
+        <PasswordChange />
         <UpdateRole />
         <DeleteLake />
+        <DeleteUser />
         <DeleteFish />
       </section>
     </main>

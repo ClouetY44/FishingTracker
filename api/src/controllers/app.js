@@ -14,7 +14,7 @@ const getHome = async (req,res) => {
 // Récupère tous les étangs
 const getAllLake = async (req,res) => {
     try {
-        const queryLake = "SELECT lake.id, Title, Src, Alt, Description FROM lake ORDER BY Title ASC"
+        const queryLake = "SELECT lake.id, Adress, Private, Title, Src, Alt, Description FROM lake ORDER BY Title ASC"
         const lakes = await Query.run(queryLake)
         res.json(lakes)
     } catch {
@@ -37,7 +37,7 @@ const getLake = async (req,res) => {
 // Récupère tous les poissons
 const getAllFish = async (req,res) => {
     try {
-        const queryFish = "SELECT fish.id, Title, Description, categories_id, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish on fish.id=pictures_fish.fish_id ORDER BY Title ASC"
+        const queryFish = "SELECT fish.id, fish.Title, fish.Description, fish.categories_id, categories.Label, pictures_fish.Src, pictures_fish.Alt FROM fish INNER JOIN pictures_fish ON fish.id = pictures_fish.fish_id INNER JOIN categories ON fish.categories_id = categories.id ORDER BY fish.Title ASC;"
         const fishs = await Query.run(queryFish)
         res.json(fishs)
     } catch {
@@ -60,7 +60,7 @@ const getFish = async (req,res) => {
 // Récupère toutes les captures
 const getAllCatch = async (req,res) => {
     try {
-        const queryAllCatch = "SELECT catch.id, Description, users_id, pictures_catch.Src, pictures_catch.Alt, users.Username FROM catch INNER JOIN pictures_catch ON catch.id=pictures_catch.catch_id INNER JOIN users ON users_id=users.id ORDER BY Catch_Date DESC"
+        const queryAllCatch = "SELECT lake.Title AS lake_title, catch.id, catch.users_id, pictures_catch.Src, pictures_catch.Alt, users.Username, catch.Catch_Date FROM catch INNER JOIN pictures_catch ON catch.id = pictures_catch.catch_id INNER JOIN lake ON catch.lake_id = lake.id INNER JOIN users ON catch.users_id = users.id ORDER BY catch.Catch_Date DESC;"
         const catches = await Query.run(queryAllCatch)
         res.json(catches)
     } catch {
